@@ -1,0 +1,19 @@
+{
+ "name": "SoyDiaz — Desarrollo web",
+ "short_name": "SoyDiaz",
+ "description": "Desarrollo web con IA, WordPress, Drupal, Shopify y sistemas web a medida.",
+ "lang": "es-GT",
+ "start_url": "/",
+ "scope": "/",
+ "display": "standalone",
+ "background_color": "#f4f0e8",
+ "theme_color": "#111111",
+ "icons": [
+  {
+   "src": "img/favicon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml",
+   "purpose": "any maskable"
+  }
+ ]
+}

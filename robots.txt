@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Permitir recursos necesarios para renderizar e indexar la landing
+Allow: /css/
+Allow: /js/
+Allow: /img/
+
+Sitemap: https://soydiaz.com/sitemap.xml
