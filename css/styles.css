@@ -1262,7 +1262,10 @@
 
     /* Sello giratorio */
     .seal-text,
-    .seal-center { fill: var(--green); }
+    .seal-center {
+      fill: #000;
+      text-shadow: 0 0 black;
+    }
 
     /* Detalles de interfaz */
     ::selection { background: var(--green); color: var(--bg); }
