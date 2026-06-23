@@ -1,0 +1,24 @@
+# .htaccess
+
+DirectoryIndex index.html
+
+RewriteEngine On
+
+# Evita aplicar reglas a archivos o carpetas que sí existen
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Permite abrir páginas sin escribir .html
+# Ejemplo: /contacto carga /contacto.html
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+# Sublandings:
+# Ejemplo: /optimisa carga /optimisa/optimisa.html
+# Ejemplo: /optimisa/ carga /optimisa/optimisa.html
+RewriteCond %{DOCUMENT_ROOT}/$1/$1.html -f
+RewriteRule ^([^/]+)/?$ /$1/$1.html [L]
+
+# Opcional: error 404 personalizado si tienes 404.html
+ErrorDocument 404 /404.html
