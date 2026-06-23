@@ -1,0 +1,17 @@
+# Optimisa - .htaccess
+# Colocar este archivo dentro de la carpeta /optimisa
+
+DirectoryIndex optimisa.html index.html
+
+RewriteEngine On
+
+# Permite entrar como /optimisa sin escribir optimisa.html
+RewriteRule ^$ optimisa.html [L]
+
+# Opcional: si alguien entra a /optimisa/index.html lo manda a /optimisa/
+RewriteCond %{THE_REQUEST} /index\.html [NC]
+RewriteRule ^index\.html$ ./ [R=301,L]
+
+# Opcional: si alguien entra a /optimisa/optimisa.html lo manda a /optimisa/
+RewriteCond %{THE_REQUEST} /optimisa\.html [NC]
+RewriteRule ^optimisa\.html$ ./ [R=301,L]

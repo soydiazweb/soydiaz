@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Optimisa | Control microbiológico para ingenios azucareros</title>
+  <meta name="description" content="Optimisa acompaña a ingenios azucareros en diagnóstico, actualización e implementación de sistemas de control microbiológico para reducir pérdidas de sacarosa." />
+  <style>
+    :root {
+      --purple: #682bb0;
+      --purple-2: #4b1494;
+      --purple-dark: #2d086e;
+      --purple-soft: #f5efff;
+      --green: #66e34f;
+      --green-2: #1aa842;
+      --green-dark: #4d8430;
+      --green-soft: #effdea;
+      --ink: #17141f;
+      --muted: #6f697b;
+      --line: #ece5f6;
+      --white: #ffffff;
+      --shadow: 0 22px 70px rgba(45, 8, 110, 0.11);
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --container: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #fff;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(var(--container), calc(100% - 44px)); margin-inline: auto; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,.86);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(104,43,176,.08);
+    }
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand img { width: 156px; height: auto; }
+    .nav-links { display: flex; align-items: center; gap: 25px; color: #575166; font-size: .92rem; font-weight: 750; }
+    .nav-links a:hover { color: var(--purple); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 850;
+      letter-spacing: -.01em;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { color: #fff; background: linear-gradient(135deg, var(--purple), var(--purple-dark)); box-shadow: 0 14px 28px rgba(104,43,176,.25); }
+    .btn-secondary { color: var(--purple-dark); background: #fff; border-color: rgba(104,43,176,.2); box-shadow: 0 12px 34px rgba(45,8,110,.07); }
+    .btn-green { color: var(--purple-dark); background: var(--green); box-shadow: 0 14px 30px rgba(102,227,79,.34); }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 48px 0 56px;
+      background:
+        radial-gradient(circle at 4% 0%, rgba(102,227,79,.2), transparent 32%),
+        radial-gradient(circle at 91% 20%, rgba(104,43,176,.16), transparent 35%),
+        linear-gradient(180deg, #fff 0%, #fbf8ff 100%);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: .96fr 1.04fr;
+      align-items: center;
+      gap: 44px;
+      min-height: calc(100vh - 156px);
+      max-height: 720px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: var(--green-soft);
+      border: 1px solid rgba(77,132,48,.14);
+      color: var(--purple-dark);
+      font-weight: 900;
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 6px rgba(102,227,79,.18); }
+    h1, h2, h3 { margin: 0; line-height: 1.06; letter-spacing: -.045em; }
+    h1 { margin-top: 18px; color: var(--purple-dark); font-size: clamp(2.35rem, 4.9vw, 4.65rem); max-width: 780px; }
+    .hero p { margin: 20px 0 0; color: var(--muted); font-size: clamp(.98rem, 1.5vw, 1.14rem); max-width: 650px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+
+    .hero-visual {
+      position: relative;
+      min-height: 440px;
+      border-radius: var(--radius-xl);
+      padding: 22px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(104,43,176,.1);
+      box-shadow: var(--shadow);
+    }
+    .hero-stage {
+      position: relative;
+      height: 100%;
+      min-height: 396px;
+      overflow: hidden;
+      border-radius: 26px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.76)),
+        linear-gradient(135deg, rgba(104,43,176,.13), rgba(102,227,79,.18));
+    }
+    .hero-stage::before {
+      content: "";
+      position: absolute;
+      inset: auto -16% 0 -10%;
+      height: 44%;
+      background:
+        repeating-linear-gradient(105deg, rgba(77,132,48,.35) 0 10px, rgba(77,132,48,.18) 10px 18px),
+        linear-gradient(180deg, rgba(102,227,79,.5), rgba(77,132,48,.25));
+      clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 100%);
+      opacity: .8;
+    }
+    .factory {
+      position: absolute;
+      left: 40px;
+      right: 40px;
+      bottom: 108px;
+      height: 210px;
+    }
+    .silo, .tower, .plant-block, .conveyor, .chimney { position: absolute; background: rgba(255,255,255,.9); border: 2px solid rgba(45,8,110,.16); box-shadow: 0 18px 45px rgba(45,8,110,.11); }
+    .silo { bottom: 0; width: 72px; height: 168px; border-radius: 26px 26px 10px 10px; }
+    .silo.one { left: 18px; }
+    .silo.two { left: 105px; height: 195px; }
+    .silo.three { left: 192px; height: 150px; }
+    .tower { right: 84px; bottom: 0; width: 86px; height: 210px; border-radius: 14px; background: rgba(255,255,255,.84); }
+    .tower::before, .tower::after { content: ""; position: absolute; left: 13px; right: 13px; height: 2px; background: rgba(45,8,110,.23); }
+    .tower::before { top: 60px; } .tower::after { top: 126px; }
+    .plant-block { right: 155px; bottom: 0; width: 150px; height: 95px; border-radius: 14px 14px 10px 10px; }
+    .conveyor { left: 140px; right: 150px; bottom: 144px; height: 16px; transform: rotate(-8deg); transform-origin: left center; border-radius: 999px; background: rgba(255,255,255,.78); }
+    .chimney { right: 44px; bottom: 0; width: 34px; height: 178px; border-radius: 999px 999px 10px 10px; }
+    .mist { position: absolute; inset: 0; background: radial-gradient(circle at 52% 40%, rgba(255,255,255,.76), transparent 46%); }
+    .visual-card {
+      position: absolute;
+      left: 28px;
+      bottom: 26px;
+      right: 28px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      z-index: 2;
+    }
+    .stat {
+      padding: 14px 12px;
+      border-radius: 18px;
+      color: #fff;
+      background: rgba(45,8,110,.78);
+      border: 1px solid rgba(255,255,255,.17);
+      backdrop-filter: blur(8px);
+    }
+    .stat strong { display: block; color: var(--green); font-size: 1.15rem; line-height: 1.1; }
+    .stat span { display: block; margin-top: 6px; font-size: .78rem; color: rgba(255,255,255,.78); }
+
+    section { padding: 78px 0; }
+    .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-bottom: 34px; }
+    .section-kicker { display: inline-block; color: var(--purple); font-weight: 950; text-transform: uppercase; letter-spacing: .11em; font-size: .77rem; }
+    .section-head h2, .center-head h2 { margin-top: 10px; color: var(--purple-dark); font-size: clamp(2rem, 3.9vw, 3.2rem); max-width: 760px; }
+    .section-head p, .center-head p { color: var(--muted); font-size: 1.02rem; max-width: 600px; margin: 0; }
+    .center-head { text-align: center; max-width: 820px; margin: 0 auto 38px; }
+    .center-head p { margin: 16px auto 0; }
+
+    .services { background: #fff; }
+    .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 456px;
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 28px;
+      background: #fff;
+      border: 1px solid rgba(104,43,176,.10);
+      box-shadow: 0 20px 55px rgba(45,8,110,.08);
+    }
+    .service-media {
+      height: 210px;
+      padding: 18px;
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+      background: linear-gradient(180deg, #fbf8ff, #fff);
+      border-bottom: 1px solid rgba(104,43,176,.08);
+    }
+    .service-body { padding: 25px 26px 28px; display: flex; flex-direction: column; flex: 1; min-width: 0; }
+    .service-body h3 { color: var(--purple-dark); font-size: 1.45rem; line-height: 1.14; }
+    .service-body p { margin: 14px 0 0; color: var(--muted); }
+    .service-link { margin-top: auto; padding-top: 18px; color: var(--purple); font-weight: 900; }
+
+    .process-map {
+      height: 100%;
+      border-radius: 20px;
+      border: 1px solid rgba(104,43,176,.1);
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 16px;
+      gap: 16px;
+    }
+    .process-title { text-align: center; color: var(--green-dark); font-size: .7rem; font-weight: 950; letter-spacing: .12em; text-transform: uppercase; }
+    .process-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; align-items: center; }
+    .step-pill {
+      position: relative;
+      min-height: 58px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 8px 6px;
+      border-radius: 15px;
+      background: var(--purple-soft);
+      border: 1px solid rgba(104,43,176,.14);
+      color: var(--purple-dark);
+      font-weight: 900;
+      font-size: .72rem;
+      line-height: 1.1;
+    }
+    .step-pill:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--green-dark);
+      font-weight: 950;
+      z-index: 2;
+    }
+    .process-tags { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .tag { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 38px; border-radius: 999px; font-weight: 900; font-size: .72rem; }
+    .tag.purple { color: var(--purple-dark); background: #fff; border: 1px solid rgba(104,43,176,.2); }
+    .tag.green { color: #174913; background: var(--green-soft); border: 1px solid rgba(77,132,48,.16); }
+
+
+
+    .analysis-visual {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #fbf8ff, #f1fceb);
+      border: 1px solid rgba(104,43,176,.08);
+      overflow: hidden;
+      padding: 10px;
+    }
+    .analysis-visual svg { width: 100%; height: 100%; }
+    .analysis-visual .label-box { fill: rgba(255,255,255,.72); }
+    .analysis-visual .stroke { stroke: var(--purple-dark); }
+    .analysis-visual .green-stroke { stroke: var(--green-2); }
+    .analysis-visual text { fill: var(--purple-dark); font-weight: 900; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+
+    .photo-collage {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 10px;
+      overflow: hidden;
+      align-items: stretch;
+    }
+    .photo-tile {
+      position: relative;
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #eef4f8;
+      border: 1px solid rgba(104,43,176,.1);
+    }
+    .photo-tile::before { content: ""; position: absolute; inset: 0; opacity: .88; }
+    .photo-tile.lab::before { background: linear-gradient(135deg, rgba(255,255,255,.68), rgba(104,43,176,.08)), radial-gradient(circle at 70% 45%, rgba(102,227,79,.32), transparent 32%); }
+    .photo-tile.micro::before { background: radial-gradient(circle at 55% 40%, rgba(31,38,57,.22), transparent 28%), linear-gradient(135deg, #f8fbff, #dae7ef); }
+    .photo-tile.factory::before { background: linear-gradient(135deg, rgba(45,8,110,.08), rgba(102,227,79,.15)), #f2f5f2; }
+    .photo-tile.data::before { background: linear-gradient(135deg, rgba(104,43,176,.11), rgba(102,227,79,.24)), #fff; }
+    .tile-icon { position: absolute; inset: 0; display: grid; place-items: center; color: var(--purple-dark); opacity: .92; }
+    .photo-tile svg { width: 62%; max-width: 100%; max-height: 72%; }
+    .photo-tile.wide { grid-column: span 2; }
+    .vials-media { width: 100%; height: 100%; display: grid; place-items: center; border-radius: 20px; background: #fff; border: 1px solid rgba(104,43,176,.08); overflow: hidden; }
+    .vials-media img { width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 10px; }
+
+    .method { background: linear-gradient(180deg, #fbf8ff, #fff); }
+    .method-card {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 34px;
+      align-items: center;
+      padding: 28px;
+      border-radius: 38px;
+      background: #fff;
+      border: 1px solid rgba(104,43,176,.1);
+      box-shadow: var(--shadow);
+    }
+    .method-photo {
+      position: relative;
+      min-height: 415px;
+      border-radius: 28px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 80%, rgba(104,43,176,.14), transparent 30%),
+        radial-gradient(circle at 80% 12%, rgba(102,227,79,.17), transparent 28%),
+        #fff;
+      border: 1px solid rgba(104,43,176,.08);
+    }
+    .method-photo img { width: 92%; height: auto; filter: drop-shadow(0 25px 40px rgba(45,8,110,.12)); }
+    .method-badge {
+      position: absolute;
+      left: 22px;
+      bottom: 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 16px;
+      border-radius: 999px;
+      color: var(--purple-dark);
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(104,43,176,.18);
+      box-shadow: 0 18px 38px rgba(45,8,110,.13);
+      font-weight: 900;
+    }
+    .method-content h2 { color: var(--purple-dark); font-size: clamp(2rem, 4vw, 3.45rem); }
+    .method-content p { color: var(--muted); margin: 18px 0 0; font-size: 1.04rem; }
+    .check-list { display: grid; gap: 12px; list-style: none; padding: 0; margin: 26px 0 0; }
+    .check-list li { display: flex; gap: 12px; align-items: flex-start; color: #37323f; font-weight: 720; }
+    .check-list li::before { content: "✓"; flex: 0 0 26px; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; color: var(--purple-dark); background: var(--green); font-weight: 950; }
+
+    .suite-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .suite-card { padding: 28px; border-radius: 28px; background: #fff; border: 1px solid rgba(104,43,176,.1); box-shadow: 0 18px 45px rgba(45,8,110,.07); }
+    .suite-num { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 17px; color: var(--purple-dark); background: var(--green-soft); font-weight: 950; }
+    .suite-card h3 { margin-top: 22px; color: var(--purple-dark); font-size: 1.42rem; line-height: 1.15; }
+    .suite-card p { margin: 14px 0 0; color: var(--muted); }
+    .suite-card ul { margin: 18px 0 0; padding-left: 18px; color: #403a4b; }
+    .suite-card li { margin: 7px 0; }
+
+    .insight { padding-top: 44px; }
+    .insight-box {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 28px;
+      align-items: center;
+      min-height: 330px;
+      padding: 42px;
+      border-radius: 34px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(102,227,79,.23), transparent 28%),
+        radial-gradient(circle at 86% 36%, rgba(255,255,255,.12), transparent 30%),
+        linear-gradient(135deg, var(--purple-dark), #401081 54%, var(--purple-2));
+      box-shadow: var(--shadow);
+    }
+    .insight-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .34;
+      background-image:
+        radial-gradient(circle at 12% 88%, rgba(102,227,79,.25) 0 2px, transparent 2px),
+        radial-gradient(circle at 86% 20%, rgba(255,255,255,.24) 0 1.5px, transparent 1.5px),
+        linear-gradient(110deg, transparent 0 40%, rgba(255,255,255,.08) 40% 41%, transparent 41% 100%);
+      background-size: 40px 40px, 28px 28px, 100% 100%;
+    }
+    .insight-wave { position: absolute; inset: auto 0 0; height: 135px; opacity: .32; }
+    .insight-content, .metric-grid { position: relative; z-index: 1; }
+    .insight-content h2 { color: #fff; font-size: clamp(1.9rem, 3vw, 2.75rem); }
+    .insight-content p { margin: 15px 0 0; color: rgba(255,255,255,.78); max-width: 480px; }
+    .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .metric-card { padding: 22px 18px; min-height: 150px; border-radius: 22px; background: rgba(255,255,255,.11); border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(8px); }
+    .metric-card svg { color: rgba(255,255,255,.76); width: 24px; height: 24px; }
+    .metric-card strong { display: block; margin-top: 18px; color: var(--green); font-size: 1.65rem; line-height: 1.05; }
+    .metric-card span { display: block; margin-top: 7px; color: rgba(255,255,255,.84); font-weight: 720; font-size: .88rem; }
+
+    .results { background: #fff; }
+    .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .result-card { padding: 24px; min-height: 180px; border-radius: 24px; background: #fff; border: 1px solid rgba(104,43,176,.1); box-shadow: 0 18px 45px rgba(45,8,110,.06); }
+    .result-card strong { display: block; color: var(--purple-dark); font-size: 1.1rem; line-height: 1.2; }
+    .result-card p { margin: 12px 0 0; color: var(--muted); }
+
+    .participants { background: var(--green-soft); }
+    .audience-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .audience-card { padding: 22px; min-height: 88px; display: flex; align-items: center; border-radius: 22px; background: #fff; border: 1px solid rgba(77,132,48,.13); color: var(--purple-dark); font-weight: 900; box-shadow: 0 16px 38px rgba(77,132,48,.07); }
+
+
+
+    .contact {
+      background:
+        radial-gradient(circle at 10% 10%, rgba(102,227,79,.14), transparent 28%),
+        linear-gradient(180deg, #fff 0%, #fbf8ff 100%);
+    }
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .contact-intro {
+      padding: 34px;
+      border-radius: 30px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(102,227,79,.28), transparent 28%),
+        linear-gradient(135deg, var(--purple-dark), var(--purple));
+      box-shadow: var(--shadow);
+    }
+    .contact-intro h2 { color: #fff; margin-top: 10px; font-size: clamp(2rem, 3.4vw, 3rem); }
+    .contact-intro p { margin: 16px 0 0; color: rgba(255,255,255,.78); }
+    .contact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .contact-card {
+      min-width: 0;
+      padding: 28px;
+      border-radius: 28px;
+      background: #fff;
+      border: 1px solid rgba(104,43,176,.10);
+      box-shadow: 0 18px 45px rgba(45,8,110,.07);
+    }
+    .contact-avatar {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      color: var(--purple-dark);
+      background: var(--green-soft);
+      border: 1px solid rgba(77,132,48,.15);
+      font-weight: 950;
+      font-size: 1.1rem;
+      margin-bottom: 18px;
+    }
+    .contact-card h3 { color: var(--purple-dark); font-size: 1.45rem; line-height: 1.15; }
+    .contact-role { margin: 8px 0 20px; color: var(--muted); font-weight: 720; }
+    .contact-links { display: grid; gap: 10px; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      padding: 12px 14px;
+      border-radius: 16px;
+      color: #332b40;
+      background: #fbf8ff;
+      border: 1px solid rgba(104,43,176,.09);
+      font-weight: 760;
+      overflow-wrap: anywhere;
+    }
+    .contact-link:hover { color: var(--purple-dark); border-color: rgba(104,43,176,.28); }
+    .contact-link .icon { flex: 0 0 auto; color: var(--green-2); font-weight: 950; }
+
+    .download { padding-bottom: 96px; }
+    .download-box {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr .88fr;
+      gap: 34px;
+      align-items: center;
+      padding: clamp(30px, 5vw, 56px);
+      border-radius: 36px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 10% 18%, rgba(102,227,79,.32), transparent 26%),
+        linear-gradient(135deg, var(--purple-dark), var(--purple));
+      box-shadow: var(--shadow);
+    }
+    .download-box::after { content: ""; position: absolute; right: -130px; bottom: -170px; width: 360px; height: 360px; border: 46px solid rgba(102,227,79,.2); border-radius: 50%; }
+    .download-box > * { position: relative; z-index: 1; }
+    .download-box h2 { margin-top: 10px; color: #fff; font-size: clamp(2rem, 4vw, 3.15rem); }
+    .download-box p { max-width: 650px; margin: 16px 0 0; color: rgba(255,255,255,.78); }
+    .download-side { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; padding-left: 34px; border-left: 1px solid rgba(255,255,255,.22); }
+    .hint { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,.75); font-size: .88rem; }
+
+    .site-footer { padding: 32px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .94rem; }
+    .footer-row { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-row strong { color: var(--purple-dark); }
+
+    @media (max-width: 1180px) {
+      .service-grid { grid-template-columns: 1fr; }
+      .service-card { min-height: auto; }
+      .service-media { height: 240px; }
+      .download-side { padding-left: 0; border-left: 0; border-top: 1px solid rgba(255,255,255,.22); padding-top: 28px; }
+    }
+    @media (max-width: 1020px) {
+      .nav-links { display: none; }
+      .hero-grid, .method-card, .insight-box, .download-box, .contact-wrap { grid-template-columns: 1fr; max-height: none; min-height: auto; }
+      .hero-visual { min-height: 380px; }
+      .suite-grid { grid-template-columns: 1fr 1fr; }
+      .metric-grid, .results-grid, .audience-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 680px) {
+      .container { width: min(100% - 28px, var(--container)); }
+      .brand img { width: 136px; }
+      .nav .btn { min-height: 42px; padding: 0 14px; font-size: .86rem; }
+      .hero { padding-top: 34px; }
+      h1 { font-size: clamp(2.1rem, 10vw, 3.2rem); }
+      section { padding: 60px 0; }
+      .hero-visual { display: none; }
+      .service-grid, .suite-grid, .metric-grid, .results-grid, .audience-grid, .contact-grid { grid-template-columns: 1fr; }
+      .service-media { height: 200px; }
+      .photo-collage { grid-template-columns: 1fr; grid-template-rows: repeat(3, minmax(0, 1fr)); }
+      .photo-tile.wide { grid-column: auto; }
+      .process-steps { grid-template-columns: 1fr; }
+      .step-pill:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -17px; transform: translateX(50%); }
+      .method-card, .download-box, .insight-box, .contact-intro, .contact-card { padding: 22px; border-radius: 28px; }
+      .method-photo { min-height: 300px; }
+      .hero-actions .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Optimisa">
+        <img src="assets/logo-optimisa.png" alt="Optimisa" />
+      </a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#metodo">Método</a>
+        <a href="#implementacion">Implementación</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#contacto">Contacto</a>
+        <a href="#descarga">Presentación</a>
+      </nav>
+      <a class="btn btn-primary" href="/assets/presentacion_congreso.pdf">Descargar presentación</a>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Optimisa 2.0 · Control microbiológico</span>
+          <h1>Control microbiológico para molinos y plantas azucareras.</h1>
+          <p>
+            Integramos observación en planta, análisis biológico y procesamiento de información para convertir hallazgos en acciones operativas que reduzcan la pérdida de sacarosa de zafra en zafra.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#servicios">Conocer servicios</a>
+            <a class="btn btn-secondary" href="#metodo">Ver método principal</a>
+          </div>
+        </div>
+
+        <aside class="hero-visual" aria-label="Visual Optimisa">
+          <div class="hero-stage">
+            <div class="mist"></div>
+            <div class="factory" aria-hidden="true">
+              <span class="silo one"></span><span class="silo two"></span><span class="silo three"></span>
+              <span class="plant-block"></span><span class="tower"></span><span class="chimney"></span><span class="conveyor"></span>
+            </div>
+            <div class="visual-card">
+              <div class="stat"><strong>ARM</strong><span>Áreas de alto riesgo</span></div>
+              <div class="stat"><strong>AM</strong><span>Actividad documentada</span></div>
+              <div class="stat"><strong>7–10</strong><span>días de diagnóstico</span></div>
+              <div class="stat"><strong>3x</strong><span>durante zafra</span></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="services" id="servicios">
+      <div class="container">
+        <div class="center-head">
+          <span class="section-kicker">Servicios Optimisa</span>
+          <h2>Diagnóstico, método de análisis e implementación continua.</h2>
+          <p>Una landing más clara: sin capturas de texto pequeñas, con recursos visuales legibles y orientados a la operación.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <div class="service-media">
+              <div class="process-map" aria-label="Mapa de proceso legible">
+                <div class="process-title">Línea de proceso</div>
+                <div class="process-steps">
+                  <div class="step-pill">Recepción<br>de caña</div>
+                  <div class="step-pill">Molinos</div>
+                  <div class="step-pill">Extracción</div>
+                  <div class="step-pill">Clarificación</div>
+                  <div class="step-pill">Evaporación</div>
+                </div>
+                <div class="process-tags">
+                  <span class="tag purple">△ Puntos críticos</span>
+                  <span class="tag green">✓ Monitoreo</span>
+                </div>
+              </div>
+            </div>
+            <div class="service-body">
+              <h3>1. Diagnóstico por áreas y puntos críticos</h3>
+              <p>Recorrido por áreas, observación detallada e identificación de Áreas de Alto Riesgo Microbiológico (ARM) y puntos críticos de proceso.</p>
+              <a class="service-link" href="#implementacion">Más información →</a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-media">
+              <div class="analysis-visual" aria-label="Referencias visuales de laboratorio, muestra y proceso">
+                <svg viewBox="0 0 560 230" role="img" aria-hidden="true">
+                  <defs>
+                    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#2d086e" flood-opacity="0.10"/>
+                    </filter>
+                  </defs>
+                  <rect x="24" y="24" width="155" height="70" rx="22" class="label-box" filter="url(#softShadow)"/>
+                  <path d="M79 42h35v25h-35zM97 67v28M70 95h62M63 122h76" fill="none" class="stroke" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="130" cy="114" r="21" fill="none" class="green-stroke" stroke-width="8"/>
+
+                  <rect x="205" y="24" width="150" height="70" rx="22" class="label-box" filter="url(#softShadow)"/>
+                  <path d="M260 39v39l-30 61c-7 14 3 29 18 29h65c15 0 25-15 18-29l-30-61V39" fill="none" class="stroke" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M246 39h68" fill="none" class="green-stroke" stroke-width="8" stroke-linecap="round"/>
+                  <path d="M242 126h76" fill="none" class="green-stroke" stroke-width="8" stroke-linecap="round"/>
+
+                  <rect x="380" y="24" width="155" height="70" rx="22" class="label-box" filter="url(#softShadow)"/>
+                  <path d="M392 162h132M410 162v-50l41 22v-34l43 25v-50l29 22v65" fill="none" class="stroke" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M402 106c16-14 34-14 52 0" fill="none" class="green-stroke" stroke-width="7" stroke-linecap="round"/>
+                  <path d="M88 184h380" fill="none" class="green-stroke" stroke-width="7" stroke-linecap="round" stroke-dasharray="1 18"/>
+                  <text x="101" y="206" text-anchor="middle" font-size="17">Muestra</text>
+                  <text x="280" y="206" text-anchor="middle" font-size="17">Análisis</text>
+                  <text x="458" y="206" text-anchor="middle" font-size="17">Decisión</text>
+                </svg>
+              </div>
+            </div>
+            <div class="service-body">
+              <h3>2. Método principal de análisis</h3>
+              <p>Pruebas rápidas y confiables para evaluar actividad microbiana, medir degradación de sacarosa y sustentar decisiones operativas.</p>
+              <a class="service-link" href="#metodo">Más información →</a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-media">
+              <div class="vials-media">
+                <img src="assets/viales.png" alt="Viales de test de resazurina" />
+              </div>
+            </div>
+            <div class="service-body">
+              <h3>3. Test de resazurina</h3>
+              <p>Indicador biológico para observar la velocidad con que ocurren transformaciones y se degrada la sacarosa en matrices de retención.</p>
+              <a class="service-link" href="#metodo">Más información →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="method" id="metodo">
+      <div class="container">
+        <div class="method-card">
+          <div class="method-photo">
+            <img src="assets/viales.png" alt="Test de resazurina en viales" />
+            <span class="method-badge">⚗ Medición rápida y confiable</span>
+          </div>
+          <div class="method-content">
+            <span class="section-kicker">Método principal</span>
+            <h2>Test de resazurina para medir la velocidad de degradación de sacarosa.</h2>
+            <p>
+              Optimisa selecciona un indicador biológico que permite observar la velocidad con que ocurren las transformaciones y se degrada la sacarosa. Los metabolitos intermedios son de paso; los finales se acumulan o se evaporan parcialmente.
+            </p>
+            <ul class="check-list">
+              <li>Indicador confiable para evaluar actividad microbiológica.</li>
+              <li>Resultado relativamente rápido y de bajo costo.</li>
+              <li>Viable para integrarse a un sistema de control continuo.</li>
+              <li>Facilita ecuaciones descriptivas y parámetros de conformidad.</li>
+              <li>Soporta decisiones oportunas para reducir el crecimiento microbiano.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="implementacion">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Implementación</span>
+            <h2>Un sistema integral, gradual y conectado con la operación.</h2>
+          </div>
+          <p>Optimisa combina analítica, procesamiento de información, inspecciones sistemáticas, comunicación de resultados y capacitación permanente.</p>
+        </div>
+
+        <div class="suite-grid">
+          <article class="suite-card">
+            <div class="suite-num">01</div>
+            <h3>Diagnóstico preliminar</h3>
+            <p>Identificación de áreas de Alto Riesgo Microbiológico (ARM) y establecimiento inicial del plan de muestreo.</p>
+            <ul><li>Recorrido por áreas.</li><li>Muestreo y análisis.</li><li>Propuestas iniciales de mitigación.</li></ul>
+          </article>
+          <article class="suite-card">
+            <div class="suite-num">02</div>
+            <h3>Actualización sectorizada</h3>
+            <p>Charlas de intercambio adaptadas a cada sector y nivel de participación en la producción.</p>
+            <ul><li>Molinos y fabricación.</li><li>Laboratorio y gerencia.</li><li>Operarios y analistas.</li></ul>
+          </article>
+          <article class="suite-card">
+            <div class="suite-num">03</div>
+            <h3>Control microbiológico integral</h3>
+            <p>Implementación gradual de pilares interconectados para sostener resultados durante la zafra.</p>
+            <ul><li>Tablas de frecuencia.</li><li>Parámetros de conformidad.</li><li>Evaluaciones periódicas.</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="insight" id="beneficios">
+      <div class="container">
+        <div class="insight-box">
+          <svg class="insight-wave" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true"><path d="M0 155 C170 105 250 210 410 150 C555 95 650 70 785 125 C940 190 1035 80 1200 120 V220 H0 Z" fill="rgba(102,227,79,.28)"/><path d="M0 190 C220 120 330 180 520 140 C720 95 840 185 1030 130 C1110 108 1160 100 1200 105" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/></svg>
+          <div class="insight-content">
+            <span class="section-kicker" style="color:var(--green)">Principio Optimisa</span>
+            <h2>El crecimiento microbiológico que se puede ver, se debe reducir.</h2>
+            <p>Sin letras de fondo: una sección más limpia para destacar el mensaje central y los indicadores de trabajo.</p>
+          </div>
+          <div class="metric-grid">
+            <div class="metric-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><strong>7–10</strong><span>días de diagnóstico de primer contacto</span></div>
+            <div class="metric-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M9 19v-8M14 19V8M19 19V3"/></svg><strong>3 veces</strong><span>recomendado durante zafra</span></div>
+            <div class="metric-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><strong>ARM</strong><span>áreas de alto riesgo microbiológico</span></div>
+            <div class="metric-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg><strong>AM</strong><span>actividad microbiológica documentada</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results" id="resultados">
+      <div class="container">
+        <div class="center-head">
+          <span class="section-kicker">Resultados esperados</span>
+          <h2>Cultura, datos y acciones para recuperar azúcar que deja de perderse.</h2>
+          <p>El valor del sistema está en convertir conocimiento técnico en hábitos operativos, rutinas de seguimiento y resultados documentados.</p>
+        </div>
+        <div class="results-grid">
+          <article class="result-card"><strong>Cultura y competencias</strong><p>Incremento de capacidades en todos los actores involucrados.</p></article>
+          <article class="result-card"><strong>Hábitos y rutinas</strong><p>Adopción de prácticas de observación, análisis y mitigación.</p></article>
+          <article class="result-card"><strong>Reducción paulatina</strong><p>Disminución documentada del crecimiento de actividad microbiológica.</p></article>
+          <article class="result-card"><strong>Recuperación de sacarosa</strong><p>Estimación del azúcar que deja de perderse por menor crecimiento microbiológico.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="participants">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Participantes</span>
+            <h2>Diseñado para equipos técnicos, operativos y administrativos del ingenio.</h2>
+          </div>
+          <p>La mitigación es más efectiva cuando cada persona entiende su rol dentro del sistema y cuenta con rutinas claras para actuar.</p>
+        </div>
+        <div class="audience-grid">
+          <div class="audience-card">Áreas de molinos</div>
+          <div class="audience-card">Fabricación</div>
+          <div class="audience-card">Laboratorio</div>
+          <div class="audience-card">Gerencia industrial y agrícola</div>
+          <div class="audience-card">Operarios de molinos</div>
+          <div class="audience-card">Analistas de laboratorio</div>
+          <div class="audience-card">Personal administrativo</div>
+          <div class="audience-card">Directivos del ingenio</div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="contact" id="contacto">
+      <div class="container">
+        <div class="contact-wrap">
+          <div class="contact-intro">
+            <span class="section-kicker" style="color:var(--green)">Contacto</span>
+            <h2>Hablemos sobre el control microbiológico de tu ingenio.</h2>
+            <p>Comunícate con el equipo de Optimisa para coordinar diagnóstico, presentación de servicios o próximos pasos de implementación.</p>
+          </div>
+          <div class="contact-grid" aria-label="Datos de contacto de Optimisa">
+            <article class="contact-card">
+              <div class="contact-avatar" aria-hidden="true">ON</div>
+              <h3>Osbel Nuñez</h3>
+              <p class="contact-role">Contacto Optimisa</p>
+              <div class="contact-links">
+                <a class="contact-link" href="mailto:osbelnu@gmail.com"><span class="icon">✉</span><span>osbelnu@gmail.com</span></a>
+                <a class="contact-link" href="tel:+50230232870"><span class="icon">☎</span><span>+502 3023 2870</span></a>
+              </div>
+            </article>
+            <article class="contact-card">
+              <div class="contact-avatar" aria-hidden="true">JD</div>
+              <h3>Jonathan Diaz</h3>
+              <p class="contact-role">Contacto Optimisa</p>
+              <div class="contact-links">
+                <a class="contact-link" href="mailto:jonathan.policarpio@gmail.com"><span class="icon">✉</span><span>jonathan.policarpio@gmail.com</span></a>
+                <a class="contact-link" href="tel:+50250326742"><span class="icon">☎</span><span>+502 5032 6742</span></a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="download" id="descarga">
+      <div class="container">
+        <div class="download-box">
+          <div>
+            <span class="section-kicker" style="color:var(--green)">Presentación de servicios</span>
+            <h2>Descarga la presentación de servicios de Optimisa.</h2>
+            <p>Este bloque queda listo para enlazar el PDF o presentación corporativa. Solo reemplaza el URL en el archivo HTML por la dirección final.</p>
+          </div>
+          <div class="download-side">
+            <a class="btn btn-green" href="/assets/presentacion_congreso.pdf" target="_blank" rel="noopener">Descargar presentación</a>
+            <div class="hint">🔒 Solo reemplaza la URL del botón en el HTML por tu enlace final.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span><strong>Optimisa</strong> · Control microbiológico integral</span>
+      <span><a href="mailto:osbelnu@gmail.com">osbelnu@gmail.com</a> · <a href="mailto:jonathan.policarpio@gmail.com">jonathan.policarpio@gmail.com</a></span>
+      <span>© <span id="year"></span> Optimisa. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
