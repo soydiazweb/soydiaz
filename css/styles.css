@@ -369,6 +369,10 @@
     .article-page {
       display: block;
     }
+    .article-page article{
+      position: relative;
+      z-index: 6;
+    }
     .article-header {
       display: grid;
       grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
