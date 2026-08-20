@@ -36,7 +36,7 @@
       align-items: center;
       justify-content: space-between;
       position: relative;
-      z-index: 40;
+      z-index: 90;
     }
 
     .logo {
@@ -71,7 +71,7 @@
       font-size: 15px;
       letter-spacing: 0.06em;
       cursor: pointer;
-      z-index: 30;
+      z-index: 90;
       position: relative;
       transition: transform .25s ease;
     }
@@ -995,21 +995,22 @@
       background: var(--ink);
       color: #cfcdc4;
       border-radius: 40px;
-      z-index: 20;
+      z-index: 70;
       box-shadow: 0 30px 60px rgba(0,0,0,.25);
       transition: max-height .55s cubic-bezier(.16,1,.3,1), padding .4s ease;
       padding: 0 48px;
     }
     body.menu-open .nav-panel {
-      max-height: 720px;
+      max-height: calc(100dvh - 48px);
       padding: 96px 48px 56px;
+      overflow-y: auto;
     }
 
     .nav-panel ul {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 14px;
     }
     .nav-panel li {
       opacity: 0;
@@ -1031,7 +1032,7 @@
     .nav-panel a,
     .nav-contact {
       font-family: 'Instrument Serif', serif;
-      font-size: 34px;
+      font-size: clamp(28px, 4.6vh, 34px);
       color: #cfcdc4;
       text-decoration: none;
       transition: color .25s ease, transform .25s ease;
@@ -1266,6 +1267,11 @@
       .gallery-card--wide { width: 260px; }
       .gallery-card--narrow { width: 165px; }
       .nav-panel { right: 22px; left: 22px; width: auto; }
+      body.menu-open .nav-panel {
+        top: 20px;
+        max-height: calc(100dvh - 40px);
+        padding: 88px 34px 34px;
+      }
       .contact-panel { right: 22px; left: 22px; bottom: 20px; width: auto; }
       body.contact-open .contact-panel { padding: 26px 26px 24px; }
       .contact-links a { font-size: 23px; }
@@ -1385,7 +1391,7 @@
     @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
       .nav-panel,
       .contact-panel {
-        background: rgba(14, 14, 14, .72);
+        background: rgba(14, 14, 14, .94);
         -webkit-backdrop-filter: blur(22px) saturate(1.5);
         backdrop-filter: blur(22px) saturate(1.5);
         box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), inset 0 1px 0 rgba(255, 255, 255, .1), 0 30px 60px rgba(0, 0, 0, .25);
