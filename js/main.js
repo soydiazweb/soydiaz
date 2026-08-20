@@ -22,8 +22,8 @@ const body = document.body;
       contactTriggers.forEach(trigger => trigger.setAttribute('aria-expanded', String(open)));
     };
 
-    btn.addEventListener('click', () => toggleMenu());
-    scrim.addEventListener('click', () => {
+    btn?.addEventListener('click', () => toggleMenu());
+    scrim?.addEventListener('click', () => {
       toggleMenu(false);
       toggleContact(false);
     });
@@ -33,10 +33,10 @@ const body = document.body;
         toggleContact(false);
       }
     });
-    panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+    panel?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
     contactTriggers.forEach(trigger => trigger.addEventListener('click', () => toggleContact()));
-    contactClose.addEventListener('click', () => toggleContact(false));
-    contactPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleContact(false)));
+    contactClose?.addEventListener('click', () => toggleContact(false));
+    contactPanel?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleContact(false)));
 
     document.querySelectorAll('.faq-question').forEach(question => {
       question.addEventListener('click', () => {
@@ -65,6 +65,8 @@ const body = document.body;
     // Reveals al hacer scroll (con stagger por grupo)
     const revealSpec = [
       ['.services .service', true],
+      ['.blog-preview h2', false], ['.blog-preview-copy p', false], ['.blog-card', true],
+      ['.blog-listing .blog-card', true], ['.article-header', false], ['.article-content > *', true],
       ['.clients h2', false], ['.clients-heading p', false], ['.client', true],
       ['.about h2', false], ['.about-lead', false], ['.about-detail', false],
       ['.personal-gallery h2', false], ['.personal-gallery-heading p', false],
@@ -114,7 +116,7 @@ const body = document.body;
     let scrollTick = false;
     const onScroll = () => {
       const y = window.scrollY;
-      backTop.classList.toggle('is-visible', y > 480);
+      backTop?.classList.toggle('is-visible', y > 480);
       const max = document.documentElement.scrollHeight - window.innerHeight;
       progress.style.transform = `scaleX(${max > 0 ? Math.min(y / max, 1) : 0})`;
       if (parallaxOn) {
@@ -139,7 +141,7 @@ const body = document.body;
       }
     }, { passive: true });
     onScroll();
-    backTop.addEventListener('click', () => {
+    backTop?.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
     });
 
