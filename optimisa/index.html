@@ -1,856 +1,572 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Optimisa | Control microbiológico para ingenios azucareros</title>
-  <meta name="description" content="Optimisa acompaña a ingenios azucareros en diagnóstico, actualización e implementación de sistemas de control microbiológico para reducir pérdidas de sacarosa." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173d5d">
+  <link rel="icon" type="image/png" href="assets/logo-optimisa.png">
+  <title>Optimisa | Servicios para la industria azucarera</title>
+  <meta name="description" content="Programa de control microbiológico y servicios especializados de Optimisa para la industria azucarera.">
   <style>
-    :root {
-      --purple: #682bb0;
-      --purple-2: #4b1494;
-      --purple-dark: #2d086e;
-      --purple-soft: #f5efff;
-      --green: #66e34f;
-      --green-2: #1aa842;
-      --green-dark: #4d8430;
-      --green-soft: #effdea;
-      --ink: #17141f;
-      --muted: #6f697b;
-      --line: #ece5f6;
-      --white: #ffffff;
-      --shadow: 0 22px 70px rgba(45, 8, 110, 0.11);
-      --radius-xl: 34px;
-      --radius-lg: 26px;
-      --radius-md: 18px;
-      --container: 1180px;
+    :root{
+      --navy:#173d5d;--navy-deep:#082942;--purple:#6835a1;--purple-deep:#3e187d;
+      --purple-soft:#f3edf9;--green:#84df65;--green-deep:#538438;--green-soft:#edf8e9;
+      --ink:#142d43;--muted:#627181;--line:#dfe7ec;--surface:#f5f7f8;--white:#fff;
+      --shadow:0 24px 64px rgba(11,41,67,.12);--soft-shadow:0 14px 42px rgba(11,41,67,.08);
+      --xl:38px;--lg:28px;--md:20px;--container:1180px
     }
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:92px}
+    body{margin:0;color:var(--ink);background:#fff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.58;text-rendering:optimizeLegibility}
+    a{color:inherit;text-decoration:none}img{display:block;max-width:100%}h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4{letter-spacing:-.035em;line-height:1.08}
+    .container{width:min(var(--container),calc(100% - 44px));margin-inline:auto}
+    .skip-link{position:fixed;top:-60px;left:20px;z-index:200;padding:12px 18px;border-radius:12px;color:#fff;background:var(--navy-deep)}
+    .skip-link:focus{top:20px}:focus-visible{outline:3px solid var(--green);outline-offset:4px}
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: #fff;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.55;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    .container { width: min(var(--container), calc(100% - 44px)); margin-inline: auto; }
+    .site-header{position:fixed;inset:0 0 auto;z-index:80;border-bottom:1px solid rgba(255,255,255,.46);background:rgba(255,255,255,.38);box-shadow:0 8px 30px rgba(5,29,49,.08);backdrop-filter:blur(18px) saturate(145%);-webkit-backdrop-filter:blur(18px) saturate(145%);transition:.25s}
+    .site-header.scrolled{background:rgba(255,255,255,.82);border-color:rgba(23,61,93,.1);box-shadow:0 12px 32px rgba(11,41,67,.08)}
+    .nav{position:relative;min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{flex:0 0 auto;width:162px;padding:0;background:transparent}
+    .nav-menu{display:flex;align-items:center;gap:30px}
+    .nav-link{position:relative;padding:10px 2px;color:var(--ink);font-size:.94rem;font-weight:900}
+    .nav-link:after{content:"";position:absolute;left:2px;right:100%;bottom:4px;height:2px;background:var(--green);transition:.2s}
+    .nav-link:hover:after,.nav-link:focus-visible:after{right:2px}.site-header.scrolled .nav-link{color:var(--ink)}
+    .nav-toggle{display:none;width:44px;height:44px;padding:0;border:0;border-radius:50%;color:var(--navy);background:#fff;cursor:pointer}
+    .nav-toggle span:not(.sr-only){display:block;width:19px;height:2px;margin:4px auto;border-radius:99px;background:currentColor;transition:.2s}
+    .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+    .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(255,255,255,.86);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(104,43,176,.08);
-    }
-    .nav {
-      min-height: 74px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .brand img { width: 156px; height: auto; }
-    .nav-links { display: flex; align-items: center; gap: 25px; color: #575166; font-size: .92rem; font-weight: 750; }
-    .nav-links a:hover { color: var(--purple); }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 46px;
-      padding: 0 22px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      font-weight: 850;
-      letter-spacing: -.01em;
-      cursor: pointer;
-      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-      white-space: nowrap;
-    }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-primary { color: #fff; background: linear-gradient(135deg, var(--purple), var(--purple-dark)); box-shadow: 0 14px 28px rgba(104,43,176,.25); }
-    .btn-secondary { color: var(--purple-dark); background: #fff; border-color: rgba(104,43,176,.2); box-shadow: 0 12px 34px rgba(45,8,110,.07); }
-    .btn-green { color: var(--purple-dark); background: var(--green); box-shadow: 0 14px 30px rgba(102,227,79,.34); }
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:50px;padding:0 23px;border:1px solid transparent;border-radius:999px;font:inherit;font-weight:900;cursor:pointer;transition:.2s}
+    .btn:hover{transform:translateY(-2px)}.btn-green{color:var(--navy-deep);background:var(--green);box-shadow:0 15px 32px rgba(132,223,101,.22)}
+    .btn-outline{color:#fff;border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.08);backdrop-filter:blur(8px)}
 
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 48px 0 56px;
-      background:
-        radial-gradient(circle at 4% 0%, rgba(102,227,79,.2), transparent 32%),
-        radial-gradient(circle at 91% 20%, rgba(104,43,176,.16), transparent 35%),
-        linear-gradient(180deg, #fff 0%, #fbf8ff 100%);
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: .96fr 1.04fr;
-      align-items: center;
-      gap: 44px;
-      min-height: calc(100vh - 156px);
-      max-height: 720px;
-    }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 7px 13px;
-      border-radius: 999px;
-      background: var(--green-soft);
-      border: 1px solid rgba(77,132,48,.14);
-      color: var(--purple-dark);
-      font-weight: 900;
-      font-size: .78rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    .eyebrow::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 6px rgba(102,227,79,.18); }
-    h1, h2, h3 { margin: 0; line-height: 1.06; letter-spacing: -.045em; }
-    h1 { margin-top: 18px; color: var(--purple-dark); font-size: clamp(2.35rem, 4.9vw, 4.65rem); max-width: 780px; }
-    .hero p { margin: 20px 0 0; color: var(--muted); font-size: clamp(.98rem, 1.5vw, 1.14rem); max-width: 650px; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+    .hero{position:relative;display:flex;align-items:flex-end;min-height:780px;padding:150px 0 58px;overflow:hidden;color:#fff;background:var(--navy-deep) url("assets/hero-industria-azucarera.png") center/cover no-repeat}
+    .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,29,49,.97),rgba(5,29,49,.88) 35%,rgba(5,29,49,.42) 67%,rgba(5,29,49,.12))}
+    .hero:after{content:"";position:absolute;inset:auto 0 0;height:34%;background:linear-gradient(transparent,rgba(5,29,49,.62))}
+    .hero-content,.hero-proof{position:relative;z-index:2}.hero-content{width:min(760px,67%)}
+    .eyebrow,.kicker{display:inline-flex;align-items:center;gap:10px;color:var(--green);font-size:.76rem;font-weight:950;letter-spacing:.11em;text-transform:uppercase}
+    .eyebrow:before{content:"";width:34px;height:3px;border-radius:99px;background:currentColor}
+    .kicker{color:var(--purple)}.kicker:after{content:"";width:34px;height:3px;border-radius:99px;background:currentColor}
+    h1{max-width:760px;margin:20px 0 0;font-size:clamp(3rem,6.1vw,5.6rem)}
+    .hero-lead{max-width:680px;margin:22px 0 0;color:rgba(255,255,255,.84);font-size:clamp(1.04rem,1.6vw,1.24rem)}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:30px}
+    .hero-proof{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;width:min(850px,78%);margin-top:48px;overflow:hidden;border:1px solid rgba(255,255,255,.17);border-radius:20px;background:rgba(255,255,255,.15);backdrop-filter:blur(13px)}
+    .proof-item{padding:18px 22px;background:rgba(8,38,61,.58)}.proof-item strong{display:block;color:var(--green);font-size:1.4rem;line-height:1}.proof-item span{display:block;margin-top:7px;color:rgba(255,255,255,.76);font-size:.82rem;font-weight:750}
+    .hero-scroll{position:absolute;right:4vw;bottom:48px;z-index:2;display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.72);font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;writing-mode:vertical-rl}
+    .hero-scroll:after{content:"";width:1px;height:62px;background:linear-gradient(var(--green),transparent)}
 
-    .hero-visual {
-      position: relative;
-      min-height: 440px;
-      border-radius: var(--radius-xl);
-      padding: 22px;
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(104,43,176,.1);
-      box-shadow: var(--shadow);
-    }
-    .hero-stage {
-      position: relative;
-      height: 100%;
-      min-height: 396px;
-      overflow: hidden;
-      border-radius: 26px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.76)),
-        linear-gradient(135deg, rgba(104,43,176,.13), rgba(102,227,79,.18));
-    }
-    .hero-stage::before {
-      content: "";
-      position: absolute;
-      inset: auto -16% 0 -10%;
-      height: 44%;
-      background:
-        repeating-linear-gradient(105deg, rgba(77,132,48,.35) 0 10px, rgba(77,132,48,.18) 10px 18px),
-        linear-gradient(180deg, rgba(102,227,79,.5), rgba(77,132,48,.25));
-      clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 100%);
-      opacity: .8;
-    }
-    .factory {
-      position: absolute;
-      left: 40px;
-      right: 40px;
-      bottom: 108px;
-      height: 210px;
-    }
-    .silo, .tower, .plant-block, .conveyor, .chimney { position: absolute; background: rgba(255,255,255,.9); border: 2px solid rgba(45,8,110,.16); box-shadow: 0 18px 45px rgba(45,8,110,.11); }
-    .silo { bottom: 0; width: 72px; height: 168px; border-radius: 26px 26px 10px 10px; }
-    .silo.one { left: 18px; }
-    .silo.two { left: 105px; height: 195px; }
-    .silo.three { left: 192px; height: 150px; }
-    .tower { right: 84px; bottom: 0; width: 86px; height: 210px; border-radius: 14px; background: rgba(255,255,255,.84); }
-    .tower::before, .tower::after { content: ""; position: absolute; left: 13px; right: 13px; height: 2px; background: rgba(45,8,110,.23); }
-    .tower::before { top: 60px; } .tower::after { top: 126px; }
-    .plant-block { right: 155px; bottom: 0; width: 150px; height: 95px; border-radius: 14px 14px 10px 10px; }
-    .conveyor { left: 140px; right: 150px; bottom: 144px; height: 16px; transform: rotate(-8deg); transform-origin: left center; border-radius: 999px; background: rgba(255,255,255,.78); }
-    .chimney { right: 44px; bottom: 0; width: 34px; height: 178px; border-radius: 999px 999px 10px 10px; }
-    .mist { position: absolute; inset: 0; background: radial-gradient(circle at 52% 40%, rgba(255,255,255,.76), transparent 46%); }
-    .visual-card {
-      position: absolute;
-      left: 28px;
-      bottom: 26px;
-      right: 28px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      z-index: 2;
-    }
-    .stat {
-      padding: 14px 12px;
-      border-radius: 18px;
-      color: #fff;
-      background: rgba(45,8,110,.78);
-      border: 1px solid rgba(255,255,255,.17);
-      backdrop-filter: blur(8px);
-    }
-    .stat strong { display: block; color: var(--green); font-size: 1.15rem; line-height: 1.1; }
-    .stat span { display: block; margin-top: 6px; font-size: .78rem; color: rgba(255,255,255,.78); }
+    .services{padding:104px 0;background:linear-gradient(#fff,#f6f8f9)}
+    .services-intro{margin-bottom:34px}
+    .services-intro h2{max-width:740px;margin:12px 0 0;color:var(--navy);font-size:clamp(2.4rem,4vw,3.7rem)}
+    .services-intro p{margin:0;color:var(--muted);font-size:1.05rem}
+    .service-stack{display:grid;gap:30px}
+    .service-shell{overflow:hidden;border:1px solid var(--line);border-radius:var(--xl);background:#fff;box-shadow:var(--shadow)}
+    .service-title{display:grid;grid-template-columns:92px 1fr auto;gap:24px;align-items:center;padding:34px 38px;border-bottom:1px solid var(--line)}
+    .service-index{display:grid;place-items:center;width:72px;height:72px;border-radius:22px;color:var(--purple-deep);background:var(--green);font-size:1.2rem;font-weight:950}
+    .service-overline{display:block;color:var(--purple);font-size:.73rem;font-weight:950;letter-spacing:.11em;text-transform:uppercase}
+    .service-title h3{margin:8px 0 0;color:var(--navy);font-size:clamp(1.8rem,3.3vw,3rem)}
+    .service-type{padding:9px 14px;border-radius:999px;color:var(--purple-deep);background:var(--purple-soft);font-size:.76rem;font-weight:900;white-space:nowrap}
 
-    section { padding: 78px 0; }
-    .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; margin-bottom: 34px; }
-    .section-kicker { display: inline-block; color: var(--purple); font-weight: 950; text-transform: uppercase; letter-spacing: .11em; font-size: .77rem; }
-    .section-head h2, .center-head h2 { margin-top: 10px; color: var(--purple-dark); font-size: clamp(2rem, 3.9vw, 3.2rem); max-width: 760px; }
-    .section-head p, .center-head p { color: var(--muted); font-size: 1.02rem; max-width: 600px; margin: 0; }
-    .center-head { text-align: center; max-width: 820px; margin: 0 auto 38px; }
-    .center-head p { margin: 16px auto 0; }
+    .program-map{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+    .map-step{position:relative;min-height:190px;padding:30px;background:#fff}
+    .map-step.operational{color:#fff;background:linear-gradient(145deg,var(--purple-deep),var(--purple))}
+    .map-number{display:block;color:var(--green-deep);font-size:.74rem;font-weight:950;letter-spacing:.1em}.operational .map-number{color:var(--green)}
+    .map-step h4{margin:22px 0 0;color:var(--navy);font-size:1.45rem}.operational h4{color:#fff}
+    .map-step p{margin:12px 0 0;color:var(--muted);font-size:.91rem}.operational p{color:rgba(255,255,255,.72)}
+    .map-step:not(:last-child):after{content:"→";position:absolute;right:-14px;top:50%;z-index:2;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;color:var(--navy-deep);background:var(--green);font-size:.8rem;font-weight:950}
 
-    .services { background: #fff; }
-    .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .service-card {
-      display: flex;
-      flex-direction: column;
-      min-height: 456px;
-      min-width: 0;
-      overflow: hidden;
-      border-radius: 28px;
-      background: #fff;
-      border: 1px solid rgba(104,43,176,.10);
-      box-shadow: 0 20px 55px rgba(45,8,110,.08);
-    }
-    .service-media {
-      height: 210px;
-      padding: 18px;
-      overflow: hidden;
-      display: flex;
-      align-items: stretch;
-      background: linear-gradient(180deg, #fbf8ff, #fff);
-      border-bottom: 1px solid rgba(104,43,176,.08);
-    }
-    .service-body { padding: 25px 26px 28px; display: flex; flex-direction: column; flex: 1; min-width: 0; }
-    .service-body h3 { color: var(--purple-dark); font-size: 1.45rem; line-height: 1.14; }
-    .service-body p { margin: 14px 0 0; color: var(--muted); }
-    .service-link { margin-top: auto; padding-top: 18px; color: var(--purple); font-weight: 900; }
+    .program-section{padding:44px 38px;border-top:1px solid var(--line)}
+    .program-section:first-of-type{border-top:0}
+    .subsection-head{display:grid;grid-template-columns:180px 1fr;gap:28px;align-items:start;margin-bottom:28px}
+    .subsection-label{display:flex;align-items:center;gap:11px;color:var(--purple);font-size:.75rem;font-weight:950;letter-spacing:.1em;text-transform:uppercase}
+    .subsection-label span{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;color:var(--navy-deep);background:var(--green)}
+    .subsection-copy h4{margin:0;color:var(--navy);font-size:clamp(1.55rem,2.8vw,2.3rem)}
+    .subsection-copy p{max-width:760px;margin:11px 0 0;color:var(--muted)}
 
-    .process-map {
-      height: 100%;
-      border-radius: 20px;
-      border: 1px solid rgba(104,43,176,.1);
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 16px;
-      gap: 16px;
-    }
-    .process-title { text-align: center; color: var(--green-dark); font-size: .7rem; font-weight: 950; letter-spacing: .12em; text-transform: uppercase; }
-    .process-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; align-items: center; }
-    .step-pill {
-      position: relative;
-      min-height: 58px;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 8px 6px;
-      border-radius: 15px;
-      background: var(--purple-soft);
-      border: 1px solid rgba(104,43,176,.14);
-      color: var(--purple-dark);
-      font-weight: 900;
-      font-size: .72rem;
-      line-height: 1.1;
-    }
-    .step-pill:not(:last-child)::after {
-      content: "→";
-      position: absolute;
-      right: -12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--green-dark);
-      font-weight: 950;
-      z-index: 2;
-    }
-    .process-tags { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .tag { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 38px; border-radius: 999px; font-weight: 900; font-size: .72rem; }
-    .tag.purple { color: var(--purple-dark); background: #fff; border: 1px solid rgba(104,43,176,.2); }
-    .tag.green { color: #174913; background: var(--green-soft); border: 1px solid rgba(77,132,48,.16); }
+    .pillar-grid{display:grid;grid-template-columns:repeat(2,1fr);column-gap:34px;counter-reset:pillars}
+    .pillar{counter-increment:pillars;display:grid;grid-template-columns:30px 1fr;gap:11px;align-items:center;min-height:58px;padding:12px 0;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent}
+    .pillar:before{content:"0" counter(pillars);display:grid;place-items:center;width:30px;height:30px;border-radius:9px;color:var(--purple-deep);background:var(--green-soft);font-size:.63rem;font-weight:950}
+    .pillar strong{color:var(--navy);font-size:.86rem;line-height:1.35}
 
+    .operative-wrap{padding:44px 38px;background:var(--surface);border-top:1px solid var(--line)}
+    .operative-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;align-items:start}
+    .operation-card{overflow:hidden;border:1px solid var(--line);border-radius:24px;background:#fff;box-shadow:var(--soft-shadow)}
+    .operation-card.implementation-card{grid-row:span 2}
+    .operation-head{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:23px 24px;border-bottom:1px solid var(--line)}
+    .operation-head h4{margin:0;color:var(--navy);font-size:1.28rem}.operation-tag{padding:7px 11px;border-radius:999px;color:var(--purple-deep);background:var(--purple-soft);font-size:.68rem;font-weight:950;letter-spacing:.07em;text-transform:uppercase}
+    .operation-body{padding:24px}
+    .check-list{display:grid;gap:11px;margin:0;padding:0;list-style:none}
+    .check-list li{display:flex;align-items:flex-start;gap:11px;color:#354d60;font-size:.92rem;font-weight:760}
+    .check-list li:before{content:"✓";flex:0 0 23px;display:grid;place-items:center;width:23px;height:23px;border-radius:50%;color:var(--navy-deep);background:var(--green);font-size:.7rem;font-weight:950}
+    .diagnostic-card{color:#fff;border-color:transparent;background:linear-gradient(145deg,var(--navy-deep),var(--navy))}
+    .diagnostic-card .operation-head{border-color:rgba(255,255,255,.13)}.diagnostic-card .operation-head h4{color:#fff}.diagnostic-card .operation-tag{color:var(--navy-deep);background:var(--green)}
+    .days{display:flex;align-items:baseline;gap:9px;margin-bottom:20px;color:var(--green)}.days strong{font-size:2.6rem;line-height:1}.days span{color:rgba(255,255,255,.68);font-size:.78rem;font-weight:850;text-transform:uppercase}
+    .answer-list{display:grid;gap:10px;margin:0;padding:0;list-style:none}.answer-list li{padding:12px 14px;border:1px solid rgba(255,255,255,.12);border-radius:14px;color:rgba(255,255,255,.82);background:rgba(255,255,255,.06);font-size:.87rem;font-weight:750}
+    .training-card .operation-body{display:grid;gap:19px}.training-item{padding-bottom:18px;border-bottom:1px solid var(--line)}.training-item:last-child{padding-bottom:0;border-bottom:0}
+    .training-item strong{display:block;color:var(--navy);font-size:.98rem}.training-item p{margin:7px 0 0;color:var(--muted);font-size:.86rem}
 
+    .results-wrap{padding:44px 38px;border-top:1px solid var(--line)}
+    .results-grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:18px}
+    .result-number{display:flex;flex-direction:column;justify-content:space-between;min-height:310px;padding:30px;border-radius:24px;color:#fff;background:linear-gradient(145deg,var(--purple-deep),var(--purple))}
+    .result-number span{color:var(--green);font-size:.73rem;font-weight:950;letter-spacing:.1em;text-transform:uppercase}
+    .result-number strong{display:block;margin-top:28px;color:var(--green);font-size:clamp(4.3rem,8vw,6.8rem);line-height:.8;letter-spacing:-.07em}
+    .result-number strong small{display:block;margin-top:18px;color:#fff;font-size:1rem;letter-spacing:0;line-height:1.2}
+    .result-number p{margin:24px 0 0;color:rgba(255,255,255,.7);font-size:.84rem}
+    .impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.impact{padding:22px;border:1px solid var(--line);border-radius:20px;background:var(--surface)}
+    .impact:before{content:"";display:block;width:30px;height:4px;margin-bottom:18px;border-radius:99px;background:var(--green)}
+    .impact strong{display:block;color:var(--navy);font-size:1rem}.impact p{margin:8px 0 0;color:var(--muted);font-size:.84rem}
+    .result-note{margin:16px 0 0;padding:14px 18px;border-left:4px solid var(--green);color:var(--muted);background:var(--green-soft);font-size:.82rem}
 
-    .analysis-visual {
-      width: 100%;
-      height: 100%;
-      display: grid;
-      place-items: center;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #fbf8ff, #f1fceb);
-      border: 1px solid rgba(104,43,176,.08);
-      overflow: hidden;
-      padding: 10px;
-    }
-    .analysis-visual svg { width: 100%; height: 100%; }
-    .analysis-visual .label-box { fill: rgba(255,255,255,.72); }
-    .analysis-visual .stroke { stroke: var(--purple-dark); }
-    .analysis-visual .green-stroke { stroke: var(--green-2); }
-    .analysis-visual text { fill: var(--purple-dark); font-weight: 900; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    .additional{color:#fff;border-color:transparent;background:linear-gradient(145deg,var(--navy-deep),var(--navy))}
+    .additional .service-title{border-color:rgba(255,255,255,.12)}.additional .service-index{color:var(--navy-deep)}.additional .service-overline{color:var(--green)}.additional .service-title h3{color:#fff}.additional .service-type{color:var(--navy-deep);background:var(--green)}
+    .additional-body{padding:36px 38px}.additional-intro{max-width:700px;margin:0 0 28px;color:rgba(255,255,255,.68)}
+    .additional-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;counter-reset:additions}
+    .additional-item{counter-increment:additions;display:grid;grid-template-columns:50px 1fr;gap:16px;min-height:138px;padding:22px;border:1px solid rgba(255,255,255,.12);border-radius:20px;background:rgba(255,255,255,.055)}
+    .additional-item:before{content:"0" counter(additions);display:grid;place-items:center;width:50px;height:50px;border-radius:15px;color:var(--green);background:rgba(132,223,101,.1);font-size:.78rem;font-weight:950}
+    .additional-item strong{display:block;margin-top:4px;color:#fff;font-size:1rem;line-height:1.35}
 
-    .photo-collage {
-      width: 100%;
-      height: 100%;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 10px;
-      overflow: hidden;
-      align-items: stretch;
-    }
-    .photo-tile {
-      position: relative;
-      min-width: 0;
-      min-height: 0;
-      overflow: hidden;
-      border-radius: 18px;
-      background: #eef4f8;
-      border: 1px solid rgba(104,43,176,.1);
-    }
-    .photo-tile::before { content: ""; position: absolute; inset: 0; opacity: .88; }
-    .photo-tile.lab::before { background: linear-gradient(135deg, rgba(255,255,255,.68), rgba(104,43,176,.08)), radial-gradient(circle at 70% 45%, rgba(102,227,79,.32), transparent 32%); }
-    .photo-tile.micro::before { background: radial-gradient(circle at 55% 40%, rgba(31,38,57,.22), transparent 28%), linear-gradient(135deg, #f8fbff, #dae7ef); }
-    .photo-tile.factory::before { background: linear-gradient(135deg, rgba(45,8,110,.08), rgba(102,227,79,.15)), #f2f5f2; }
-    .photo-tile.data::before { background: linear-gradient(135deg, rgba(104,43,176,.11), rgba(102,227,79,.24)), #fff; }
-    .tile-icon { position: absolute; inset: 0; display: grid; place-items: center; color: var(--purple-dark); opacity: .92; }
-    .photo-tile svg { width: 62%; max-width: 100%; max-height: 72%; }
-    .photo-tile.wide { grid-column: span 2; }
-    .vials-media { width: 100%; height: 100%; display: grid; place-items: center; border-radius: 20px; background: #fff; border: 1px solid rgba(104,43,176,.08); overflow: hidden; }
-    .vials-media img { width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 10px; }
+    .service-overview{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:34px}
+    .service-summary{display:grid;grid-template-columns:64px 1fr 38px;gap:19px;align-items:center;min-height:190px;padding:28px;border:1px solid var(--line);border-radius:26px;background:#fff;box-shadow:var(--soft-shadow);transition:transform .2s,box-shadow .2s}
+    .service-summary:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+    .service-summary.other-summary{color:#fff;border-color:transparent;background:linear-gradient(145deg,var(--navy-deep),var(--navy))}
+    .summary-number{display:grid;place-items:center;width:64px;height:64px;border-radius:20px;color:var(--purple-deep);background:var(--green);font-weight:950}
+    .summary-label{display:block;color:var(--purple);font-size:.7rem;font-weight:950;letter-spacing:.1em;text-transform:uppercase}.other-summary .summary-label{color:var(--green)}
+    .service-summary h3{margin:8px 0 0;color:var(--navy);font-size:1.55rem}.other-summary h3{color:#fff}
+    .service-summary p{margin:11px 0 0;color:var(--muted);font-size:.88rem;font-weight:760}.other-summary p{color:rgba(255,255,255,.65)}
+    .summary-arrow{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;color:var(--navy-deep);background:var(--green);font-weight:950}
 
-    .method { background: linear-gradient(180deg, #fbf8ff, #fff); }
-    .method-card {
-      display: grid;
-      grid-template-columns: .95fr 1.05fr;
-      gap: 34px;
-      align-items: center;
-      padding: 28px;
-      border-radius: 38px;
-      background: #fff;
-      border: 1px solid rgba(104,43,176,.1);
-      box-shadow: var(--shadow);
-    }
-    .method-photo {
-      position: relative;
-      min-height: 415px;
-      border-radius: 28px;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 20% 80%, rgba(104,43,176,.14), transparent 30%),
-        radial-gradient(circle at 80% 12%, rgba(102,227,79,.17), transparent 28%),
-        #fff;
-      border: 1px solid rgba(104,43,176,.08);
-    }
-    .method-photo img { width: 92%; height: auto; filter: drop-shadow(0 25px 40px rgba(45,8,110,.12)); }
-    .method-badge {
-      position: absolute;
-      left: 22px;
-      bottom: 22px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 13px 16px;
-      border-radius: 999px;
-      color: var(--purple-dark);
-      background: rgba(255,255,255,.88);
-      border: 1px solid rgba(104,43,176,.18);
-      box-shadow: 0 18px 38px rgba(45,8,110,.13);
-      font-weight: 900;
-    }
-    .method-content h2 { color: var(--purple-dark); font-size: clamp(2rem, 4vw, 3.45rem); }
-    .method-content p { color: var(--muted); margin: 18px 0 0; font-size: 1.04rem; }
-    .check-list { display: grid; gap: 12px; list-style: none; padding: 0; margin: 26px 0 0; }
-    .check-list li { display: flex; gap: 12px; align-items: flex-start; color: #37323f; font-weight: 720; }
-    .check-list li::before { content: "✓"; flex: 0 0 26px; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; color: var(--purple-dark); background: var(--green); font-weight: 950; }
+    .program-detail{overflow:hidden;border:1px solid var(--line);border-radius:var(--xl);background:#fff;box-shadow:var(--shadow)}
+    .detail-heading{display:grid;grid-template-columns:76px 1fr;gap:24px;align-items:center;padding:36px 38px;background:#fff}
+    .detail-number{display:grid;place-items:center;width:76px;height:76px;border-radius:23px;color:var(--purple-deep);background:var(--green);font-size:1.15rem;font-weight:950}
+    .detail-eyebrow{display:block;color:var(--purple);font-size:.72rem;font-weight:950;letter-spacing:.1em;text-transform:uppercase}
+    .detail-heading h3{margin:8px 0 0;color:var(--navy);font-size:clamp(1.9rem,3.6vw,3.25rem)}.detail-heading p{max-width:700px;margin:12px 0 0;color:var(--muted)}
+    .detail-block{padding:38px;border-top:1px solid var(--line)}.theory-block{background:#fbfcfc}.operation-block{background:var(--surface)}
+    .block-heading{display:grid;grid-template-columns:38px 1fr;gap:14px;align-items:start;margin-bottom:22px}
+    .block-letter{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;color:var(--purple-deep);background:var(--purple-soft);font-size:.77rem;font-weight:950}
+    .block-heading div>span{display:block;color:var(--purple);font-size:.72rem;font-weight:950;letter-spacing:.1em;text-transform:uppercase}
+    .block-heading h4{margin:5px 0 0;color:var(--navy);font-size:clamp(1.3rem,2vw,1.8rem)}.block-heading p{margin:7px 0 0;color:var(--muted);font-size:.9rem}
 
-    .suite-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .suite-card { padding: 28px; border-radius: 28px; background: #fff; border: 1px solid rgba(104,43,176,.1); box-shadow: 0 18px 45px rgba(45,8,110,.07); }
-    .suite-num { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 17px; color: var(--purple-dark); background: var(--green-soft); font-weight: 950; }
-    .suite-card h3 { margin-top: 22px; color: var(--purple-dark); font-size: 1.42rem; line-height: 1.15; }
-    .suite-card p { margin: 14px 0 0; color: var(--muted); }
-    .suite-card ul { margin: 18px 0 0; padding-left: 18px; color: #403a4b; }
-    .suite-card li { margin: 7px 0; }
+    .other-detail{margin-top:30px;overflow:hidden;border-radius:var(--xl);color:#fff;background:linear-gradient(145deg,var(--navy-deep),var(--navy));box-shadow:var(--shadow)}
+    .other-heading{border-bottom:1px solid rgba(255,255,255,.12);background:transparent}.other-heading .detail-number{color:var(--navy-deep)}.other-heading .detail-eyebrow{color:var(--green)}.other-heading h3{color:#fff}
+    .other-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:34px 38px}
+    .other-item{display:grid;grid-template-columns:44px 1fr;gap:15px;align-items:start;min-height:126px;padding:21px;border:1px solid rgba(255,255,255,.12);border-radius:19px;background:rgba(255,255,255,.055)}
+    .other-item span{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;color:var(--green);background:rgba(132,223,101,.1);font-size:.72rem;font-weight:950}.other-item strong{margin-top:4px;color:#fff;font-size:.96rem;line-height:1.4}
 
-    .insight { padding-top: 44px; }
-    .insight-box {
-      position: relative;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: .9fr 1.1fr;
-      gap: 28px;
-      align-items: center;
-      min-height: 330px;
-      padding: 42px;
-      border-radius: 34px;
-      color: #fff;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(102,227,79,.23), transparent 28%),
-        radial-gradient(circle at 86% 36%, rgba(255,255,255,.12), transparent 30%),
-        linear-gradient(135deg, var(--purple-dark), #401081 54%, var(--purple-2));
-      box-shadow: var(--shadow);
-    }
-    .insight-box::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      opacity: .34;
-      background-image:
-        radial-gradient(circle at 12% 88%, rgba(102,227,79,.25) 0 2px, transparent 2px),
-        radial-gradient(circle at 86% 20%, rgba(255,255,255,.24) 0 1.5px, transparent 1.5px),
-        linear-gradient(110deg, transparent 0 40%, rgba(255,255,255,.08) 40% 41%, transparent 41% 100%);
-      background-size: 40px 40px, 28px 28px, 100% 100%;
-    }
-    .insight-wave { position: absolute; inset: auto 0 0; height: 135px; opacity: .32; }
-    .insight-content, .metric-grid { position: relative; z-index: 1; }
-    .insight-content h2 { color: #fff; font-size: clamp(1.9rem, 3vw, 2.75rem); }
-    .insight-content p { margin: 15px 0 0; color: rgba(255,255,255,.78); max-width: 480px; }
-    .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-    .metric-card { padding: 22px 18px; min-height: 150px; border-radius: 22px; background: rgba(255,255,255,.11); border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(8px); }
-    .metric-card svg { color: rgba(255,255,255,.76); width: 24px; height: 24px; }
-    .metric-card strong { display: block; margin-top: 18px; color: var(--green); font-size: 1.65rem; line-height: 1.05; }
-    .metric-card span { display: block; margin-top: 7px; color: rgba(255,255,255,.84); font-weight: 720; font-size: .88rem; }
+    .program-story{margin-top:34px;border-top:4px solid var(--purple)}
+    .story-intro{display:grid;grid-template-columns:1fr .8fr;gap:42px;align-items:end;padding:54px 0 64px}
+    .story-eyebrow{display:block;color:var(--purple);font-size:.73rem;font-weight:950;letter-spacing:.11em;text-transform:uppercase}
+    .story-intro h3,.other-story h3{margin:11px 0 0;color:var(--navy);font-size:clamp(2.7rem,5vw,4.7rem)}
+    .story-intro p{margin:0;color:var(--muted);font-size:1.04rem}
+    .story-flow{position:relative}.story-flow:before{content:"";position:absolute;top:0;bottom:0;left:205px;width:1px;background:linear-gradient(var(--purple),var(--green),var(--purple))}
+    .story-chapter{display:grid;grid-template-columns:205px 1fr;gap:58px;padding:72px 0;border-top:1px solid var(--line)}
+    .story-side{align-self:start;padding-right:24px}
+    .story-side span{display:block;color:var(--purple);font-size:.7rem;font-weight:950;letter-spacing:.1em;text-transform:uppercase}
+    .story-side h4{margin:10px 0 0;color:var(--navy);font-size:clamp(1.8rem,3vw,2.7rem)}
+    .story-content{min-width:0}.story-lead{max-width:780px;margin:0 0 34px;color:var(--navy);font-size:clamp(1.2rem,2vw,1.55rem);font-weight:720;line-height:1.45}
+    .story-content h5{margin:0 0 19px;color:var(--navy);font-size:clamp(1.3rem,2.2vw,1.85rem)}
+    .logic-path{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin:2px 0 46px;padding-top:18px}
+    .logic-path:before{content:"";position:absolute;top:37px;left:17%;right:17%;height:1px;background:linear-gradient(90deg,var(--purple),var(--green-deep))}
+    .logic-point{position:relative;z-index:1;text-align:center}
+    .logic-icon{display:grid;place-items:center;width:40px;height:40px;margin:0 auto 15px;border:1px solid var(--line);border-radius:50%;color:var(--purple);background:#fff}
+    .logic-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .logic-point strong{display:block;color:var(--navy);font-size:.9rem}.logic-point small{display:block;margin-top:5px;color:var(--muted);font-size:.73rem}
+    .narrative-list{display:grid;grid-template-columns:1fr 1fr;column-gap:34px;margin:0;padding:0;list-style:none}
+    .narrative-list li{position:relative;padding:13px 10px 13px 21px;border-bottom:1px solid var(--line);color:#344c5f;font-size:.9rem;font-weight:760}
+    .narrative-list li:before{content:"";position:absolute;left:0;top:21px;width:7px;height:7px;border-radius:50%;background:var(--green)}
+    .story-part{margin-top:48px;padding-top:38px;border-top:1px solid var(--line)}.story-part:first-of-type{margin-top:0;padding-top:0;border-top:0}
+    .part-label{display:block;margin-bottom:9px;color:var(--purple);font-size:.7rem;font-weight:950;letter-spacing:.1em;text-transform:uppercase}
+    .diagnostic-story{display:grid;grid-template-columns:.36fr .64fr;gap:48px;align-items:start}
+    .diagnostic-stat strong{display:block;color:var(--purple);font-size:clamp(4.8rem,9vw,7.7rem);line-height:.78;letter-spacing:-.075em}.diagnostic-stat span{display:block;max-width:160px;margin-top:19px;color:var(--muted);font-size:.78rem;font-weight:900;line-height:1.35;text-transform:uppercase}
+    .plain-list{display:grid;gap:0;margin:0;padding:0;list-style:none}.plain-list li{padding:12px 0;border-bottom:1px solid var(--line);color:#344c5f;font-size:.91rem;font-weight:760}
+    .inclusion-map{margin:0 0 10px;padding:4px 0 6px}
+    .inclusion-map>span{display:block;margin-bottom:20px;color:var(--purple);font-size:.7rem;font-weight:950;letter-spacing:.1em;text-transform:uppercase}
+    .inclusion-items{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+    .inclusion-item{position:relative;padding:27px 28px 4px 0}
+    .inclusion-item:not(:first-child){padding-left:28px;border-left:1px solid var(--line)}
+    .inclusion-item:before{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:var(--green)}
+    .inclusion-item:not(:first-child):before{left:28px}
+    .inclusion-item strong{display:block;color:var(--navy);font-size:.95rem;line-height:1.35}.inclusion-item small{display:block;margin-top:7px;color:var(--muted);font-size:.76rem;line-height:1.4}
+    .training-narrative{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:24px}.training-narrative>div{padding:0 24px;border-left:1px solid var(--line)}.training-narrative>div:first-child{padding-left:0;border-left:0}.training-narrative strong{display:block;color:var(--navy);font-size:.94rem}.training-narrative p{margin:9px 0 0;color:var(--muted);font-size:.85rem}
+    .results-story{display:grid;grid-template-columns:.45fr .55fr;gap:58px;align-items:start}.story-stat span{display:block;color:var(--purple);font-size:.7rem;font-weight:950;letter-spacing:.1em;text-transform:uppercase}.story-stat strong{display:block;margin-top:22px;color:var(--green-deep);font-size:clamp(5rem,10vw,8rem);line-height:.75;letter-spacing:-.08em}.story-stat small{display:block;margin-top:19px;color:var(--navy);font-size:1rem;font-weight:900}.story-stat p{margin:18px 0 0;color:var(--muted);font-size:.85rem}
+    .outcome-list{display:grid;grid-template-columns:1fr 1fr;column-gap:28px}.outcome-list>div{padding:17px 0;border-top:2px solid var(--green)}.outcome-list strong{display:block;color:var(--navy);font-size:.94rem}.outcome-list p{margin:7px 0 0;color:var(--muted);font-size:.84rem}.story-note{margin:34px 0 0;padding-top:15px;border-top:1px solid var(--line);color:var(--muted);font-size:.79rem}
+    .other-story{margin-top:40px;padding:66px 0 24px;border-top:4px solid var(--navy)}
+    .other-story header{display:block}.other-story h3{font-size:clamp(2.5rem,4.5vw,4.2rem)}
+    .other-editorial-list{display:grid;grid-template-columns:1fr 1fr;column-gap:42px;margin-top:42px}
+    .other-editorial-list p{position:relative;margin:0;padding:19px 0 19px 22px;border-top:1px solid var(--line);color:var(--navy);font-size:.98rem;font-weight:760}.other-editorial-list p:before{content:"";position:absolute;left:0;top:27px;width:8px;height:8px;border-radius:50%;background:var(--purple)}
 
-    .results { background: #fff; }
-    .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .result-card { padding: 24px; min-height: 180px; border-radius: 24px; background: #fff; border: 1px solid rgba(104,43,176,.1); box-shadow: 0 18px 45px rgba(45,8,110,.06); }
-    .result-card strong { display: block; color: var(--purple-dark); font-size: 1.1rem; line-height: 1.2; }
-    .result-card p { margin: 12px 0 0; color: var(--muted); }
+    .about{padding:112px 0;background:#fff}
+    .about-heading{display:grid;grid-template-columns:.72fr 1fr;gap:70px;align-items:end;padding-bottom:46px;border-bottom:1px solid var(--line)}
+    .section-eyebrow{display:block;color:var(--purple);font-size:.73rem;font-weight:950;letter-spacing:.11em;text-transform:uppercase}
+    .about-heading h2,.testimonials-heading h2{margin:12px 0 0;color:var(--navy);font-size:clamp(2.8rem,5vw,4.8rem)}
+    .about-heading p{max-width:650px;margin:0;color:var(--muted);font-size:clamp(1.05rem,1.8vw,1.28rem)}
+    .about-focus{display:grid;grid-template-columns:1fr 1fr;gap:0;padding-top:28px}
+    .about-focus span{position:relative;padding-left:18px;color:var(--navy);font-size:.82rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase}.about-focus span:before{content:"";position:absolute;top:.48em;left:0;width:7px;height:7px;border-radius:50%;background:var(--green)}
 
-    .participants { background: var(--green-soft); }
-    .audience-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-    .audience-card { padding: 22px; min-height: 88px; display: flex; align-items: center; border-radius: 22px; background: #fff; border: 1px solid rgba(77,132,48,.13); color: var(--purple-dark); font-weight: 900; box-shadow: 0 16px 38px rgba(77,132,48,.07); }
+    .testimonials{padding:108px 0;color:#fff;background:linear-gradient(145deg,var(--navy-deep),#103b5c)}
+    .testimonials-heading{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;margin-bottom:58px}
+    .testimonials-heading .section-eyebrow{color:var(--green)}.testimonials-heading h2{max-width:650px;color:#fff;font-size:clamp(2rem,3.4vw,3.25rem)}
+    .carousel-controls{display:flex;align-items:center;gap:12px}
+    .carousel-counter{min-width:58px;color:rgba(255,255,255,.62);font-size:.75rem;font-weight:900;letter-spacing:.08em;text-align:center}
+    .carousel-button{display:grid;place-items:center;width:46px;height:46px;border:1px solid rgba(255,255,255,.2);border-radius:50%;color:#fff;background:transparent;font-size:1.1rem;cursor:pointer;transition:.2s}.carousel-button:hover,.carousel-button:focus-visible{color:var(--navy-deep);border-color:var(--green);background:var(--green)}
+    .carousel-viewport{overflow:hidden}
+    .carousel-track{display:flex;gap:44px;transition:transform .55s cubic-bezier(.22,.61,.36,1);will-change:transform}
+    .testimonial{flex:0 0 calc((100% - 44px)/2);margin:0;padding:34px 0 0;border-top:3px solid var(--green)}
+    .testimonial blockquote{margin:0;color:#fff;font-size:clamp(1.22rem,2.1vw,1.7rem);font-weight:720;line-height:1.48;letter-spacing:-.02em}.testimonial blockquote:before{content:"“";display:block;height:34px;color:var(--green);font-family:Georgia,serif;font-size:4rem;line-height:.8}
+    .testimonial figcaption{margin-top:30px;color:var(--green);font-size:.8rem;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
+    .carousel-dots{display:flex;gap:8px;margin-top:46px}
+    .carousel-dot{width:28px;height:4px;padding:0;border:0;border-radius:99px;background:rgba(255,255,255,.2);cursor:pointer;transition:.25s}.carousel-dot.active{width:54px;background:var(--green)}
 
+    .presence{padding:112px 0;background:#f7f9fa}
+    .presence-heading{display:grid;grid-template-columns:.8fr 1fr;gap:64px;align-items:end;margin-bottom:50px}
+    .presence-heading h2,.contact-heading h2{margin:12px 0 0;color:var(--navy);font-size:clamp(2.5rem,4.6vw,4.35rem)}
+    .presence-heading p{max-width:600px;margin:0;color:var(--muted);font-size:1.08rem}
+    .presence-layout{display:grid;grid-template-columns:1fr 280px;gap:0;overflow:hidden;border-radius:30px;background:var(--navy-deep);box-shadow:var(--shadow)}
+    .map-panel{position:relative;min-height:570px;overflow:hidden;background:radial-gradient(circle at 43% 38%,rgba(104,53,161,.32),transparent 37%),linear-gradient(145deg,#0a304c,#071f33)}
+    .map-panel:before{content:"";position:absolute;inset:0;opacity:.2;background-image:linear-gradient(rgba(255,255,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.13) 1px,transparent 1px);background-size:48px 48px}
+    .presence-map{position:relative;z-index:1;width:100%;height:570px;display:block}
+    .map-land{fill:rgba(255,255,255,.1);stroke:rgba(255,255,255,.28);stroke-width:2}
+    .pulse-ring{fill:none;stroke:var(--green);stroke-width:3;transform-box:fill-box;transform-origin:center;animation:mapPulse 2.3s ease-out infinite}
+    .pulse-core{fill:var(--green);stroke:#fff;stroke-width:2}
+    .map-point:nth-of-type(2) .pulse-ring{animation-delay:.25s}.map-point:nth-of-type(3) .pulse-ring{animation-delay:.5s}.map-point:nth-of-type(4) .pulse-ring{animation-delay:.75s}.map-point:nth-of-type(5) .pulse-ring{animation-delay:1s}.map-point:nth-of-type(6) .pulse-ring{animation-delay:1.25s}
+    @keyframes mapPulse{0%{opacity:.95;transform:scale(.45)}75%,100%{opacity:0;transform:scale(2.35)}}
+    .country-panel{display:flex;flex-direction:column;justify-content:center;padding:42px 34px;color:#fff;background:rgba(255,255,255,.045);border-left:1px solid rgba(255,255,255,.1)}
+    .country-panel>span{color:var(--green);font-size:.7rem;font-weight:950;letter-spacing:.1em;text-transform:uppercase}
+    .country-list{display:grid;gap:0;margin:21px 0 0;padding:0;list-style:none}
+    .country-list li{display:flex;align-items:center;gap:13px;padding:14px 0;border-top:1px solid rgba(255,255,255,.11);font-size:.95rem;font-weight:850}
+    .country-dot{position:relative;flex:0 0 9px;width:9px;height:9px;border-radius:50%;background:var(--green)}.country-dot:after{content:"";position:absolute;inset:-5px;border:1px solid rgba(132,223,101,.45);border-radius:50%}
 
+    .contact{padding:104px 0;background:#fff}
+    .contact-layout{display:grid;grid-template-columns:1fr .8fr;gap:80px;align-items:end}
+    .contact-heading p{max-width:580px;margin:22px 0 0;color:var(--muted);font-size:1.04rem}
+    .contact-details{border-top:4px solid var(--purple)}
+    .contact-person{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:22px 0;border-bottom:1px solid var(--line)}.contact-person span{color:var(--muted);font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.contact-person strong{color:var(--navy);font-size:1.02rem}
+    .contact-link{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:19px 0;border-bottom:1px solid var(--line);color:var(--navy);font-size:clamp(1.05rem,2vw,1.4rem);font-weight:850}.contact-link span:last-child{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;color:var(--navy-deep);background:var(--green);font-size:.82rem}.contact-link:hover{color:var(--purple)}
 
-    .contact {
-      background:
-        radial-gradient(circle at 10% 10%, rgba(102,227,79,.14), transparent 28%),
-        linear-gradient(180deg, #fff 0%, #fbf8ff 100%);
-    }
-    .contact-wrap {
-      display: grid;
-      grid-template-columns: .92fr 1.08fr;
-      gap: 28px;
-      align-items: stretch;
-    }
-    .contact-intro {
-      padding: 34px;
-      border-radius: 30px;
-      color: #fff;
-      background:
-        radial-gradient(circle at 20% 18%, rgba(102,227,79,.28), transparent 28%),
-        linear-gradient(135deg, var(--purple-dark), var(--purple));
-      box-shadow: var(--shadow);
-    }
-    .contact-intro h2 { color: #fff; margin-top: 10px; font-size: clamp(2rem, 3.4vw, 3rem); }
-    .contact-intro p { margin: 16px 0 0; color: rgba(255,255,255,.78); }
-    .contact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-    .contact-card {
-      min-width: 0;
-      padding: 28px;
-      border-radius: 28px;
-      background: #fff;
-      border: 1px solid rgba(104,43,176,.10);
-      box-shadow: 0 18px 45px rgba(45,8,110,.07);
-    }
-    .contact-avatar {
-      width: 54px;
-      height: 54px;
-      display: grid;
-      place-items: center;
-      border-radius: 18px;
-      color: var(--purple-dark);
-      background: var(--green-soft);
-      border: 1px solid rgba(77,132,48,.15);
-      font-weight: 950;
-      font-size: 1.1rem;
-      margin-bottom: 18px;
-    }
-    .contact-card h3 { color: var(--purple-dark); font-size: 1.45rem; line-height: 1.15; }
-    .contact-role { margin: 8px 0 20px; color: var(--muted); font-weight: 720; }
-    .contact-links { display: grid; gap: 10px; }
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-      padding: 12px 14px;
-      border-radius: 16px;
-      color: #332b40;
-      background: #fbf8ff;
-      border: 1px solid rgba(104,43,176,.09);
-      font-weight: 760;
-      overflow-wrap: anywhere;
-    }
-    .contact-link:hover { color: var(--purple-dark); border-color: rgba(104,43,176,.28); }
-    .contact-link .icon { flex: 0 0 auto; color: var(--green-2); font-weight: 950; }
+    body.modal-open{overflow:hidden}
+    .promo-modal{position:fixed;inset:0;z-index:160;display:grid;place-items:center;padding:20px;opacity:1;visibility:visible;transition:opacity .25s,visibility .25s}
+    .promo-modal[aria-hidden="true"]{opacity:0;visibility:hidden;pointer-events:none}
+    .promo-backdrop{position:absolute;inset:0;background:rgba(5,29,49,.72);backdrop-filter:blur(10px)}
+    .promo-dialog{position:relative;width:min(720px,100%);overflow:hidden;border-radius:30px;color:#fff;background:linear-gradient(145deg,var(--purple-deep),var(--purple));box-shadow:0 34px 90px rgba(5,29,49,.42);transform:translateY(0) scale(1);transition:transform .3s}
+    .promo-modal[aria-hidden="true"] .promo-dialog{transform:translateY(22px) scale(.98)}
+    .promo-dialog:after{content:"";position:absolute;right:-80px;bottom:-110px;width:300px;height:300px;border:1px solid rgba(132,223,101,.22);border-radius:50%;box-shadow:0 0 0 38px rgba(132,223,101,.06),0 0 0 76px rgba(132,223,101,.04)}
+    .promo-close{position:absolute;top:20px;right:20px;z-index:2;display:grid;place-items:center;width:42px;height:42px;border:1px solid rgba(255,255,255,.24);border-radius:50%;color:#fff;background:transparent;font-size:1.35rem;cursor:pointer}.promo-close:hover{color:var(--navy-deep);border-color:var(--green);background:var(--green)}
+    .promo-content{position:relative;z-index:1;padding:54px 58px 56px}
+    .promo-eyebrow{display:block;color:var(--green);font-size:.72rem;font-weight:950;letter-spacing:.11em;text-transform:uppercase}
+    .promo-content h2{max-width:560px;margin:15px 0 0;font-size:clamp(2.3rem,5vw,4rem)}
+    .promo-intro{max-width:560px;margin:20px 0 0;color:rgba(255,255,255,.8);font-size:1.02rem}
+    .promo-offer{display:flex;align-items:center;gap:18px;margin-top:28px;padding-top:25px;border-top:1px solid rgba(255,255,255,.16)}.promo-offer strong{color:var(--green);font-size:2.7rem;line-height:1}.promo-offer span{max-width:310px;color:#fff;font-size:.88rem;font-weight:800}
+    .promo-actions{display:flex;align-items:center;gap:18px;margin-top:32px}.promo-actions .btn{background:var(--green);color:var(--navy-deep)}.promo-actions small{max-width:270px;color:rgba(255,255,255,.6);font-size:.72rem}
 
-    .download { padding-bottom: 96px; }
-    .download-box {
-      position: relative;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr .88fr;
-      gap: 34px;
-      align-items: center;
-      padding: clamp(30px, 5vw, 56px);
-      border-radius: 36px;
-      color: #fff;
-      background:
-        radial-gradient(circle at 10% 18%, rgba(102,227,79,.32), transparent 26%),
-        linear-gradient(135deg, var(--purple-dark), var(--purple));
-      box-shadow: var(--shadow);
-    }
-    .download-box::after { content: ""; position: absolute; right: -130px; bottom: -170px; width: 360px; height: 360px; border: 46px solid rgba(102,227,79,.2); border-radius: 50%; }
-    .download-box > * { position: relative; z-index: 1; }
-    .download-box h2 { margin-top: 10px; color: #fff; font-size: clamp(2rem, 4vw, 3.15rem); }
-    .download-box p { max-width: 650px; margin: 16px 0 0; color: rgba(255,255,255,.78); }
-    .download-side { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; padding-left: 34px; border-left: 1px solid rgba(255,255,255,.22); }
-    .hint { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,.75); font-size: .88rem; }
+    .site-footer{padding:30px 0;color:rgba(255,255,255,.62);background:#061f33;font-size:.86rem}
+    .footer-row{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}.footer-row strong{color:#fff}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}.reveal.visible{opacity:1;transform:none}
 
-    .site-footer { padding: 32px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .94rem; }
-    .footer-row { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-    .footer-row strong { color: var(--purple-dark); }
-
-    @media (max-width: 1180px) {
-      .service-grid { grid-template-columns: 1fr; }
-      .service-card { min-height: auto; }
-      .service-media { height: 240px; }
-      .download-side { padding-left: 0; border-left: 0; border-top: 1px solid rgba(255,255,255,.22); padding-top: 28px; }
+    @media(max-width:980px){
+      .hero-content{width:min(760px,82%)}.hero-proof{width:min(850px,90%)}
+      .services-intro,.service-overview,.operative-grid,.results-grid{grid-template-columns:1fr}.operation-card.implementation-card{grid-row:auto}
+      .additional-grid{grid-template-columns:1fr}.service-title{grid-template-columns:76px 1fr}.service-type{grid-column:2;justify-self:start}
+      .about-heading{gap:42px}.nav-menu{gap:18px}.nav-link{font-size:.84rem}.presence-layout{grid-template-columns:1fr 230px}.country-panel{padding:36px 25px}.contact-layout{gap:48px}
     }
-    @media (max-width: 1020px) {
-      .nav-links { display: none; }
-      .hero-grid, .method-card, .insight-box, .download-box, .contact-wrap { grid-template-columns: 1fr; max-height: none; min-height: auto; }
-      .hero-visual { min-height: 380px; }
-      .suite-grid { grid-template-columns: 1fr 1fr; }
-      .metric-grid, .results-grid, .audience-grid { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width:700px){
+      .container{width:min(var(--container),calc(100% - 28px))}.site-header{background:rgba(255,255,255,.64);border-color:rgba(255,255,255,.48)}.nav{min-height:72px}.brand{width:138px}.nav-toggle{display:block}.nav-menu{position:absolute;top:calc(100% + 1px);left:0;right:0;display:none;align-items:stretch;gap:0;padding:12px;border:1px solid var(--line);border-radius:0 0 18px 18px;background:rgba(255,255,255,.94);box-shadow:var(--shadow);backdrop-filter:blur(18px)}.nav-menu.open{display:flex;flex-direction:column}.nav-link{padding:12px 10px;color:var(--ink)}.nav-link:after{display:none}
+      .hero{min-height:730px;padding:128px 0 42px;background-position:65% center}.hero:before{background:linear-gradient(90deg,rgba(5,29,49,.97),rgba(5,29,49,.76))}.hero-content,.hero-proof{width:100%}h1{font-size:clamp(2.7rem,13vw,4.2rem)}.hero-actions .btn{width:100%}.hero-proof{grid-template-columns:1fr;margin-top:34px}.proof-item{display:grid;grid-template-columns:84px 1fr;align-items:center;padding:14px 18px}.proof-item span{margin-top:0}.hero-scroll{display:none}
+      .services{padding:72px 0}.services-intro{grid-template-columns:1fr;gap:18px;margin-bottom:34px}.services-intro h2{font-size:clamp(2.3rem,11vw,3.3rem)}
+      .service-title{grid-template-columns:58px 1fr;gap:15px;padding:24px 20px}.service-index{width:58px;height:58px;border-radius:17px}.service-title h3{font-size:1.7rem}.service-type{grid-column:1/-1;justify-self:start}
+      .program-map{grid-template-columns:1fr}.map-step{min-height:auto;padding:24px 22px}.map-step:not(:last-child):after{content:"↓";right:calc(50% - 14px);top:auto;bottom:-14px}
+      .program-section,.operative-wrap,.results-wrap,.additional-body{padding:32px 20px}.subsection-head{grid-template-columns:1fr;gap:14px}.pillar-grid,.impact-grid{grid-template-columns:1fr}
+      .service-summary{grid-template-columns:54px 1fr;min-height:auto;padding:22px}.summary-number{width:54px;height:54px;border-radius:17px}.summary-arrow{grid-column:2;justify-self:start}.service-summary h3{font-size:1.3rem}
+      .detail-heading{grid-template-columns:58px 1fr;gap:15px;padding:25px 20px}.detail-number{width:58px;height:58px;border-radius:17px}.detail-heading h3{font-size:1.65rem}.detail-heading p{grid-column:1/-1}
+      .detail-block{padding:28px 20px}.block-heading{grid-template-columns:34px 1fr;gap:12px}.block-letter{width:34px;height:34px;border-radius:10px}.other-list{grid-template-columns:1fr;padding:28px 20px}.other-item{grid-template-columns:42px 1fr;padding:18px}.other-item span{width:42px;height:42px}
+      .story-intro{grid-template-columns:1fr;gap:18px;padding:44px 0}.story-intro h3{font-size:clamp(2.3rem,11vw,3.35rem)}.story-flow:before{display:none}.story-chapter{grid-template-columns:1fr;gap:24px;padding:52px 0}.story-side{position:static;padding:0}.story-side h4{font-size:2rem}.story-lead{margin-bottom:27px;font-size:1.1rem}.logic-path{gap:10px;margin-bottom:40px}.logic-path:before{left:16%;right:16%}.logic-point strong{font-size:.8rem}.logic-point small{font-size:.67rem}.narrative-list,.diagnostic-story,.results-story,.outcome-list,.other-editorial-list{grid-template-columns:1fr}.inclusion-items{grid-template-columns:1fr;border-top:0;border-left:1px solid var(--line)}.inclusion-item,.inclusion-item:not(:first-child){padding:0 0 25px 25px;border-left:0}.inclusion-item:last-child{padding-bottom:4px}.inclusion-item:before,.inclusion-item:not(:first-child):before{top:5px;left:-5px}.training-narrative{grid-template-columns:1fr;gap:22px}.training-narrative>div{padding:20px 0 0;border-left:0;border-top:1px solid var(--line)}.training-narrative>div:first-child{padding-top:0;border-top:0}.diagnostic-story{gap:30px}.diagnostic-stat span{max-width:230px}.other-story{padding-top:48px}.other-story header{display:block}.other-editorial-list{margin-top:30px}
+      .about,.testimonials{padding:78px 0}.about-heading,.testimonials-heading{grid-template-columns:1fr;gap:24px}.about-heading{padding-bottom:34px}.about-heading h2{font-size:clamp(2.5rem,12vw,3.5rem)}.about-focus{grid-template-columns:1fr;gap:15px;padding-top:24px}.testimonials-heading{margin-bottom:42px}.testimonials-heading h2{font-size:clamp(1.9rem,9vw,2.6rem)}.carousel-controls{justify-content:space-between}.carousel-track{gap:24px}.testimonial{flex-basis:100%;padding-top:27px}.testimonial blockquote{font-size:1.2rem}.carousel-dots{margin-top:36px}
+      .presence,.contact{padding:78px 0}.presence-heading,.contact-layout{grid-template-columns:1fr;gap:24px}.presence-heading{margin-bottom:36px}.presence-heading h2,.contact-heading h2{font-size:clamp(2.35rem,11vw,3.35rem)}.presence-layout{grid-template-columns:1fr;border-radius:22px}.map-panel{min-height:390px}.presence-map{height:390px}.country-panel{padding:30px 26px;border-top:1px solid rgba(255,255,255,.1);border-left:0}.country-list{grid-template-columns:1fr 1fr;column-gap:22px}.country-list li{padding:11px 0}.contact-details{margin-top:20px}.contact-person{align-items:flex-start;flex-direction:column;gap:7px}.contact-link{font-size:1rem}.promo-modal{padding:12px}.promo-dialog{border-radius:24px}.promo-content{padding:48px 26px 32px}.promo-content h2{padding-right:25px;font-size:clamp(2rem,10vw,2.7rem)}.promo-offer{align-items:flex-start;flex-direction:column;gap:10px}.promo-actions{align-items:stretch;flex-direction:column}.promo-actions .btn{width:100%}.promo-actions small{max-width:none}.promo-close{top:14px;right:14px}
+      .operation-head{align-items:flex-start;flex-direction:column}.additional-item{grid-template-columns:42px 1fr;padding:18px}.additional-item:before{width:42px;height:42px}
     }
-    @media (max-width: 680px) {
-      .container { width: min(100% - 28px, var(--container)); }
-      .brand img { width: 136px; }
-      .nav .btn { min-height: 42px; padding: 0 14px; font-size: .86rem; }
-      .hero { padding-top: 34px; }
-      h1 { font-size: clamp(2.1rem, 10vw, 3.2rem); }
-      section { padding: 60px 0; }
-      .hero-visual { display: none; }
-      .service-grid, .suite-grid, .metric-grid, .results-grid, .audience-grid, .contact-grid { grid-template-columns: 1fr; }
-      .service-media { height: 200px; }
-      .photo-collage { grid-template-columns: 1fr; grid-template-rows: repeat(3, minmax(0, 1fr)); }
-      .photo-tile.wide { grid-column: auto; }
-      .process-steps { grid-template-columns: 1fr; }
-      .step-pill:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -17px; transform: translateX(50%); }
-      .method-card, .download-box, .insight-box, .contact-intro, .contact-card { padding: 22px; border-radius: 28px; }
-      .method-photo { min-height: 300px; }
-      .hero-actions .btn { width: 100%; }
-    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}.reveal{opacity:1;transform:none}}
   </style>
 </head>
 <body>
-  <header class="site-header">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header" id="siteHeader">
     <div class="container nav">
-      <a class="brand" href="#inicio" aria-label="Optimisa">
-        <img src="assets/logo-optimisa.png" alt="Optimisa" />
-      </a>
-      <nav class="nav-links" aria-label="Navegación principal">
-        <a href="#servicios">Servicios</a>
-        <a href="#metodo">Método</a>
-        <a href="#implementacion">Implementación</a>
-        <a href="#resultados">Resultados</a>
-        <a href="#contacto">Contacto</a>
-        <a href="#descarga">Presentación</a>
-      </nav>
-      <a class="btn btn-primary" href="/optimisa/assets/presentacion_congreso.pdf">Descargar presentación</a>
+      <a class="brand" href="#inicio" aria-label="Optimisa, ir al inicio"><img src="assets/logo-optimisa.png" alt="Optimisa"></a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav"><span></span><span></span><span></span><span class="sr-only">Abrir menú</span></button>
+      <nav class="nav-menu" id="primaryNav" aria-label="Navegación principal"><a class="nav-link" href="#servicios">Servicios</a><a class="nav-link" href="#quienes-somos">Quiénes somos</a><a class="nav-link" href="#testimonios">Testimonios</a><a class="nav-link" href="#presencia">Presencia</a><a class="nav-link" href="#contacto">Contacto</a></nav>
     </div>
   </header>
 
-  <main id="inicio">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <span class="eyebrow">Optimisa 2.0 · Control microbiológico</span>
-          <h1>Control microbiológico para molinos y plantas azucareras.</h1>
-          <p>
-            Integramos observación en planta, análisis biológico y procesamiento de información para convertir hallazgos en acciones operativas que reduzcan la pérdida de sacarosa de zafra en zafra.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#servicios">Conocer servicios</a>
-            <a class="btn btn-secondary" href="#metodo">Ver método principal</a>
-          </div>
+  <main id="contenido">
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-content">
+          <span class="eyebrow">Control microbiológico integral</span>
+          <h1>Menos pérdidas. Más control operativo.</h1>
+          <p class="hero-lead">Detectamos dónde ocurren las pérdidas microbiológicas y convertimos esa información en acciones que ayudan a aumentar la recuperación de azúcar, zafra tras zafra.</p>
+          <div class="hero-actions"><a class="btn btn-green" href="#servicios">Ver servicios →</a><a class="btn btn-outline" href="#programa-control">Conocer el programa</a></div>
         </div>
-
-        <aside class="hero-visual" aria-label="Visual Optimisa">
-          <div class="hero-stage">
-            <div class="mist"></div>
-            <div class="factory" aria-hidden="true">
-              <span class="silo one"></span><span class="silo two"></span><span class="silo three"></span>
-              <span class="plant-block"></span><span class="tower"></span><span class="chimney"></span><span class="conveyor"></span>
-            </div>
-            <div class="visual-card">
-              <div class="stat"><strong>ARM</strong><span>Áreas de alto riesgo</span></div>
-              <div class="stat"><strong>AM</strong><span>Actividad documentada</span></div>
-              <div class="stat"><strong>7–10</strong><span>días de diagnóstico</span></div>
-              <div class="stat"><strong>3x</strong><span>durante zafra</span></div>
-            </div>
-          </div>
-        </aside>
+        <div class="hero-proof" aria-label="Datos clave del programa">
+          <div class="proof-item"><strong>3 días</strong><span>Actualización y capacitación intensiva</span></div>
+          <div class="proof-item"><strong>7–10 días</strong><span>Diagnóstico preliminar en planta</span></div>
+          <div class="proof-item"><strong>0.802 kg/t</strong><span>Azúcar recuperada en un caso documentado</span></div>
+        </div>
       </div>
+      <div class="hero-scroll" aria-hidden="true">Servicios</div>
     </section>
 
     <section class="services" id="servicios">
       <div class="container">
-        <div class="center-head">
-          <span class="section-kicker">Servicios Optimisa</span>
-          <h2>Diagnóstico, método de análisis e implementación continua.</h2>
-          <p>Una landing más clara: sin capturas de texto pequeñas, con recursos visuales legibles y orientados a la operación.</p>
-        </div>
+        <div class="services-intro reveal"><span class="kicker">Optimisa</span><h2>Servicios</h2></div>
 
-        <div class="service-grid">
-          <article class="service-card">
-            <div class="service-media">
-              <div class="process-map" aria-label="Mapa de proceso legible">
-                <div class="process-title">Línea de proceso</div>
-                <div class="process-steps">
-                  <div class="step-pill">Recepción<br>de caña</div>
-                  <div class="step-pill">Molinos</div>
-                  <div class="step-pill">Extracción</div>
-                  <div class="step-pill">Clarificación</div>
-                  <div class="step-pill">Evaporación</div>
+        <article class="program-story reveal" id="programa-control">
+          <header class="story-intro">
+            <div><span class="story-eyebrow">Programa</span><h3>Programa de Control Microbiológico</h3></div>
+            <p>El programa integra conocimiento, aplicación en planta y medición de resultados para convertir el control microbiológico en una práctica sostenida durante la zafra.</p>
+          </header>
+
+          <div class="story-flow">
+            <section class="story-chapter" aria-labelledby="teorica-title">
+              <aside class="story-side"><span>El conocimiento</span><h4>Teórica</h4></aside>
+              <div class="story-content">
+                <p class="story-lead">Todo comienza por comprender dónde se concentra la actividad microbiológica, qué debe medirse y cómo esa información orienta las decisiones.</p>
+                <div class="logic-path" aria-label="La lógica del conocimiento: identificar, medir y decidir">
+                  <div class="logic-point"><span class="logic-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"></circle><path d="m16 16 4 4"></path><path d="M11 8v6M8 11h6"></path></svg></span><strong>Identificar</strong><small>Dónde ocurre</small></div>
+                  <div class="logic-point"><span class="logic-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18V9M10 18V5M16 18v-7M22 18V3"></path><path d="M2 18h20"></path></svg></span><strong>Medir</strong><small>Qué está cambiando</small></div>
+                  <div class="logic-point"><span class="logic-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"></path></svg></span><strong>Decidir</strong><small>Dónde actuar</small></div>
                 </div>
-                <div class="process-tags">
-                  <span class="tag purple">△ Puntos críticos</span>
-                  <span class="tag green">✓ Monitoreo</span>
+                <h5 id="teorica-title">Fundamentos y pilares del programa</h5>
+                <ul class="narrative-list">
+                  <li>Identificación y definición de puntos de control</li><li>Muestreo y seguimiento sistemático</li><li>Medición de la actividad microbiológica</li><li>Indicadores para la toma de decisiones</li><li>Acciones correctivas y preventivas</li><li>Acompañamiento durante la zafra</li><li>Evaluación y mejora continua</li>
+                </ul>
+              </div>
+            </section>
+
+            <section class="story-chapter" aria-labelledby="operativa-title">
+              <aside class="story-side"><span>En la planta</span><h4>Operativa</h4></aside>
+              <div class="story-content">
+                <p class="story-lead">Ese conocimiento se lleva a la operación mediante una implementación integral, un diagnóstico preliminar y la preparación continua del equipo.</p>
+
+                <div class="inclusion-map" aria-label="La operación integra implementación, diagnóstico y capacitación">
+                  <span>La operación integra</span>
+                  <div class="inclusion-items">
+                    <div class="inclusion-item"><strong>Implementación integral</strong><small>Sistema, seguimiento y acompañamiento</small></div>
+                    <div class="inclusion-item"><strong>Diagnóstico preliminar</strong><small>Lectura de la planta durante 7–10 días</small></div>
+                    <div class="inclusion-item"><strong>Actualización y capacitación</strong><small>Conocimiento aplicado por todo el equipo</small></div>
+                  </div>
+                </div>
+
+                <div class="story-part">
+                  <span class="part-label">Implementación integral</span>
+                  <h5 id="operativa-title">El programa se incorpora a la dinámica del ingenio</h5>
+                  <ul class="narrative-list compact"><li>Diagnóstico inicial</li><li>Capacitación permanente del personal</li><li>Implementación del sistema</li><li>Indicadores de seguimiento</li><li>Acompañamiento durante la zafra</li><li>Evaluación de resultados</li><li>Documentación de azúcar recuperada</li></ul>
+                </div>
+
+                <div class="story-part diagnostic-story">
+                  <div class="diagnostic-stat"><strong>7–10</strong><span>días de diagnóstico preliminar</span></div>
+                  <div><span class="part-label">Antes de implementar</span><h5>El diagnóstico permite conocer</h5><ul class="plain-list"><li>Dónde se origina la mayor actividad microbiológica.</li><li>Cuánto potencial existe para reducir pérdidas.</li><li>Qué acciones ofrecen el mayor impacto inmediato.</li></ul></div>
+                </div>
+
+                <div class="story-part">
+                  <span class="part-label">Actualización y capacitación</span>
+                  <h5>El equipo convierte el conocimiento en acción</h5>
+                  <div class="training-narrative"><div><strong>Del conocimiento a la acción</strong><p>Cada área comprende su papel en la prevención y reducción de la actividad microbiológica.</p></div><div><strong>Capacitación diferenciada por función</strong><p>Contenidos para operarios, supervisores, laboratorio, fabricación y gerencia.</p></div><div><strong>Exploración conjunta</strong><p>Identificación de oportunidades de mejora y evaluación de la viabilidad de procedimientos.</p></div></div>
                 </div>
               </div>
-            </div>
-            <div class="service-body">
-              <h3>1. Diagnóstico por áreas y puntos críticos</h3>
-              <p>Recorrido por áreas, observación detallada e identificación de Áreas de Alto Riesgo Microbiológico (ARM) y puntos críticos de proceso.</p>
-              <a class="service-link" href="#implementacion">Más información →</a>
-            </div>
-          </article>
+            </section>
 
-          <article class="service-card">
-            <div class="service-media">
-              <div class="analysis-visual" aria-label="Referencias visuales de laboratorio, muestra y proceso">
-                <svg viewBox="0 0 560 230" role="img" aria-hidden="true">
-                  <defs>
-                    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-                      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#2d086e" flood-opacity="0.10"/>
-                    </filter>
-                  </defs>
-                  <rect x="24" y="24" width="155" height="70" rx="22" class="label-box" filter="url(#softShadow)"/>
-                  <path d="M79 42h35v25h-35zM97 67v28M70 95h62M63 122h76" fill="none" class="stroke" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                  <circle cx="130" cy="114" r="21" fill="none" class="green-stroke" stroke-width="8"/>
-
-                  <rect x="205" y="24" width="150" height="70" rx="22" class="label-box" filter="url(#softShadow)"/>
-                  <path d="M260 39v39l-30 61c-7 14 3 29 18 29h65c15 0 25-15 18-29l-30-61V39" fill="none" class="stroke" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M246 39h68" fill="none" class="green-stroke" stroke-width="8" stroke-linecap="round"/>
-                  <path d="M242 126h76" fill="none" class="green-stroke" stroke-width="8" stroke-linecap="round"/>
-
-                  <rect x="380" y="24" width="155" height="70" rx="22" class="label-box" filter="url(#softShadow)"/>
-                  <path d="M392 162h132M410 162v-50l41 22v-34l43 25v-50l29 22v65" fill="none" class="stroke" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M402 106c16-14 34-14 52 0" fill="none" class="green-stroke" stroke-width="7" stroke-linecap="round"/>
-                  <path d="M88 184h380" fill="none" class="green-stroke" stroke-width="7" stroke-linecap="round" stroke-dasharray="1 18"/>
-                  <text x="101" y="206" text-anchor="middle" font-size="17">Muestra</text>
-                  <text x="280" y="206" text-anchor="middle" font-size="17">Análisis</text>
-                  <text x="458" y="206" text-anchor="middle" font-size="17">Decisión</text>
-                </svg>
+            <section class="story-chapter" aria-labelledby="resultados-title">
+              <aside class="story-side"><span>La evidencia</span><h4>Resultados</h4></aside>
+              <div class="story-content">
+                <p class="story-lead">La información recogida permite observar tendencias, evaluar el impacto y documentar la recuperación de sacarosa.</p>
+                <div class="results-story">
+                  <div class="story-stat"><span>Caso técnico documentado</span><strong>0.802</strong><small>kg de azúcar / tonelada de caña</small><p>Recuperación acumulada reportada y estabilizada en las zafras 2024–25 y 2025–26.</p></div>
+                  <div class="outcome-list" id="resultados-title"><div><strong>Menor pérdida de sacarosa</strong><p>Control donde crece la contaminación.</p></div><div><strong>Indicadores objetivos</strong><p>Datos para decisiones operativas.</p></div><div><strong>Personal capacitado</strong><p>Capacidad para mantener el control.</p></div><div><strong>Evidencia del impacto</strong><p>Resultados y azúcar recuperada.</p></div></div>
+                </div>
+                <p class="story-note">El resultado cuantitativo corresponde al caso incluido en el material técnico de Optimisa. Los resultados de cada ingenio dependen del diagnóstico y de la implementación.</p>
               </div>
+            </section>
+          </div>
+        </article>
+
+        <section class="other-story reveal" id="servicios-adicionales">
+          <header><span class="story-eyebrow">Servicio</span><h3>Otros servicios</h3></header>
+          <div class="other-editorial-list">
+            <p>Acompañamiento para mitigar causas de contaminación en producto terminado.</p>
+            <p>Análisis de contaminación, supervivencia o desarrollo microbiológico en todo el proceso de fabricación.</p>
+            <p>Control de asepsia con métodos novedosos de bajo costo en bolsas de envase y plantas de lavado.</p>
+            <p>Implementación de un nuevo enfoque para la evaluación de indicadores de eficiencia en la industria azucarera.</p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="about" id="quienes-somos">
+      <div class="container">
+        <header class="about-heading reveal">
+          <div><span class="section-eyebrow">Quiénes somos</span><h2>Innovación que optimiza.</h2></div>
+          <p>Nuestra trayectoria combina microbiología aplicada y experiencia técnica para resolver retos de la agroindustria azucarera.</p>
+        </header>
+        <div class="about-focus reveal" aria-label="Áreas de experiencia"><span>Microbiología convencional</span><span>Microbiología no convencional</span></div>
+      </div>
+    </section>
+
+    <section class="testimonials" id="testimonios">
+      <div class="container">
+        <header class="testimonials-heading reveal">
+          <div><span class="section-eyebrow">Testimonios</span><h2>Resultados que se viven en planta.</h2></div>
+          <div class="carousel-controls" aria-label="Controles del carrusel">
+            <button class="carousel-button" id="testimonialPrev" type="button" aria-label="Testimonios anteriores">←</button>
+            <span class="carousel-counter" id="testimonialCounter" aria-live="polite">01 / 03</span>
+            <button class="carousel-button" id="testimonialNext" type="button" aria-label="Testimonios siguientes">→</button>
+          </div>
+        </header>
+
+        <div class="testimonial-carousel reveal" id="testimonialCarousel" aria-roledescription="carrusel" aria-label="Testimonios de clientes">
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="testimonialTrack">
+              <figure class="testimonial"><blockquote>El programa nos permitió identificar con claridad los puntos donde se concentraban las pérdidas microbiológicas y actuar con mayor precisión durante la zafra.</blockquote><figcaption>Carlos Méndez</figcaption></figure>
+              <figure class="testimonial"><blockquote>La capacitación logró que operación, laboratorio y supervisión trabajaran con los mismos criterios y dieran seguimiento a los indicadores.</blockquote><figcaption>Ana Rodríguez</figcaption></figure>
+              <figure class="testimonial"><blockquote>El diagnóstico preliminar nos mostró oportunidades de mejora que no eran visibles con los controles que utilizábamos anteriormente.</blockquote><figcaption>Luis Herrera</figcaption></figure>
+              <figure class="testimonial"><blockquote>El acompañamiento durante la zafra fue clave para sostener las acciones correctivas y evaluar su efecto en el proceso.</blockquote><figcaption>María Fernanda López</figcaption></figure>
+              <figure class="testimonial"><blockquote>Ahora contamos con información más clara para priorizar decisiones y documentar la reducción de pérdidas de sacarosa.</blockquote><figcaption>Jorge Castillo</figcaption></figure>
+              <figure class="testimonial"><blockquote>La metodología se integró a la operación diaria sin complicar el trabajo del equipo y dejó capacidades instaladas en planta.</blockquote><figcaption>Patricia Gómez</figcaption></figure>
             </div>
-            <div class="service-body">
-              <h3>2. Método principal de análisis</h3>
-              <p>Pruebas rápidas y confiables para evaluar actividad microbiana, medir degradación de sacarosa y sustentar decisiones operativas.</p>
-              <a class="service-link" href="#metodo">Más información →</a>
-            </div>
-          </article>
-
-          <article class="service-card">
-            <div class="service-media">
-              <div class="vials-media">
-                <img src="assets/viales.png" alt="Viales de test de resazurina" />
-              </div>
-            </div>
-            <div class="service-body">
-              <h3>3. Test de resazurina</h3>
-              <p>Indicador biológico para observar la velocidad con que ocurren transformaciones y se degrada la sacarosa en matrices de retención.</p>
-              <a class="service-link" href="#metodo">Más información →</a>
-            </div>
-          </article>
+          </div>
+          <div class="carousel-dots" id="testimonialDots" aria-label="Páginas de testimonios"></div>
         </div>
       </div>
     </section>
 
-    <section class="method" id="metodo">
+    <section class="presence" id="presencia">
       <div class="container">
-        <div class="method-card">
-          <div class="method-photo">
-            <img src="assets/viales.png" alt="Test de resazurina en viales" />
-            <span class="method-badge">⚗ Medición rápida y confiable</span>
+        <header class="presence-heading reveal">
+          <div><span class="section-eyebrow">Presencia internacional</span><h2>Experiencia que cruza fronteras.</h2></div>
+          <p>El control microbiológico ha sido aplicado o compartido con ingenios de seis países de Latinoamérica.</p>
+        </header>
+
+        <div class="presence-layout reveal">
+          <div class="map-panel">
+            <svg class="presence-map" viewBox="0 0 760 620" role="img" aria-labelledby="mapTitle mapDescription">
+              <title id="mapTitle">Presencia internacional de Optimisa en Latinoamérica</title>
+              <desc id="mapDescription">Puntos animados señalan México, Guatemala, El Salvador, Honduras, Colombia y Perú.</desc>
+              <g class="map-land" aria-hidden="true">
+                <path d="M106 117 168 92l84 11 51 40-18 35-39-8-25 28-42-20-48 1-32-29Z"/>
+                <path d="M242 170c31 16 53 31 69 57 16 19 39 20 60 38l-18 24c-29-10-48-19-64-38-16-20-33-31-57-42Z"/>
+                <path d="M360 264c47-17 112 2 147 53 27 40 20 84-3 122-23 37-48 61-57 100-9 40-31 70-55 59-17-14-10-51-27-77-20-30-45-48-52-91-7-46 12-89 26-121 8-20 3-34 21-45Z"/>
+                <path d="m433 596-13 19-8-16Z"/>
+              </g>
+              <g class="map-points">
+                <g class="map-point"><title>México</title><circle class="pulse-ring" cx="192" cy="143" r="13"/><circle class="pulse-core" cx="192" cy="143" r="6"/></g>
+                <g class="map-point"><title>Guatemala</title><circle class="pulse-ring" cx="254" cy="194" r="13" style="animation-delay:.25s"/><circle class="pulse-core" cx="254" cy="194" r="6"/></g>
+                <g class="map-point"><title>El Salvador</title><circle class="pulse-ring" cx="277" cy="223" r="13" style="animation-delay:.5s"/><circle class="pulse-core" cx="277" cy="223" r="6"/></g>
+                <g class="map-point"><title>Honduras</title><circle class="pulse-ring" cx="310" cy="211" r="13" style="animation-delay:.75s"/><circle class="pulse-core" cx="310" cy="211" r="6"/></g>
+                <g class="map-point"><title>Colombia</title><circle class="pulse-ring" cx="373" cy="315" r="13" style="animation-delay:1s"/><circle class="pulse-core" cx="373" cy="315" r="6"/></g>
+                <g class="map-point"><title>Perú</title><circle class="pulse-ring" cx="349" cy="424" r="13" style="animation-delay:1.25s"/><circle class="pulse-core" cx="349" cy="424" r="6"/></g>
+              </g>
+            </svg>
           </div>
-          <div class="method-content">
-            <span class="section-kicker">Método principal</span>
-            <h2>Test de resazurina para medir la velocidad de degradación de sacarosa.</h2>
-            <p>
-              Optimisa selecciona un indicador biológico que permite observar la velocidad con que ocurren las transformaciones y se degrada la sacarosa. Los metabolitos intermedios son de paso; los finales se acumulan o se evaporan parcialmente.
-            </p>
-            <ul class="check-list">
-              <li>Indicador confiable para evaluar actividad microbiológica.</li>
-              <li>Resultado relativamente rápido y de bajo costo.</li>
-              <li>Viable para integrarse a un sistema de control continuo.</li>
-              <li>Facilita ecuaciones descriptivas y parámetros de conformidad.</li>
-              <li>Soporta decisiones oportunas para reducir el crecimiento microbiano.</li>
-            </ul>
-          </div>
+          <aside class="country-panel" aria-label="Países con presencia">
+            <span>Presencia en ingenios</span>
+            <ul class="country-list"><li><i class="country-dot"></i>México</li><li><i class="country-dot"></i>Guatemala</li><li><i class="country-dot"></i>El Salvador</li><li><i class="country-dot"></i>Honduras</li><li><i class="country-dot"></i>Colombia</li><li><i class="country-dot"></i>Perú</li></ul>
+          </aside>
         </div>
       </div>
     </section>
-
-    <section id="implementacion">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="section-kicker">Implementación</span>
-            <h2>Un sistema integral, gradual y conectado con la operación.</h2>
-          </div>
-          <p>Optimisa combina analítica, procesamiento de información, inspecciones sistemáticas, comunicación de resultados y capacitación permanente.</p>
-        </div>
-
-        <div class="suite-grid">
-          <article class="suite-card">
-            <div class="suite-num">01</div>
-            <h3>Diagnóstico preliminar</h3>
-            <p>Identificación de áreas de Alto Riesgo Microbiológico (ARM) y establecimiento inicial del plan de muestreo.</p>
-            <ul><li>Recorrido por áreas.</li><li>Muestreo y análisis.</li><li>Propuestas iniciales de mitigación.</li></ul>
-          </article>
-          <article class="suite-card">
-            <div class="suite-num">02</div>
-            <h3>Actualización sectorizada</h3>
-            <p>Charlas de intercambio adaptadas a cada sector y nivel de participación en la producción.</p>
-            <ul><li>Molinos y fabricación.</li><li>Laboratorio y gerencia.</li><li>Operarios y analistas.</li></ul>
-          </article>
-          <article class="suite-card">
-            <div class="suite-num">03</div>
-            <h3>Control microbiológico integral</h3>
-            <p>Implementación gradual de pilares interconectados para sostener resultados durante la zafra.</p>
-            <ul><li>Tablas de frecuencia.</li><li>Parámetros de conformidad.</li><li>Evaluaciones periódicas.</li></ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="insight" id="beneficios">
-      <div class="container">
-        <div class="insight-box">
-          <svg class="insight-wave" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true"><path d="M0 155 C170 105 250 210 410 150 C555 95 650 70 785 125 C940 190 1035 80 1200 120 V220 H0 Z" fill="rgba(102,227,79,.28)"/><path d="M0 190 C220 120 330 180 520 140 C720 95 840 185 1030 130 C1110 108 1160 100 1200 105" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3"/></svg>
-          <div class="insight-content">
-            <span class="section-kicker" style="color:var(--green)">Principio Optimisa</span>
-            <h2>El crecimiento microbiológico que se puede ver, se debe reducir.</h2>
-            <p>Sin letras de fondo: una sección más limpia para destacar el mensaje central y los indicadores de trabajo.</p>
-          </div>
-          <div class="metric-grid">
-            <div class="metric-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><strong>7–10</strong><span>días de diagnóstico de primer contacto</span></div>
-            <div class="metric-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M9 19v-8M14 19V8M19 19V3"/></svg><strong>3 veces</strong><span>recomendado durante zafra</span></div>
-            <div class="metric-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><strong>ARM</strong><span>áreas de alto riesgo microbiológico</span></div>
-            <div class="metric-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg><strong>AM</strong><span>actividad microbiológica documentada</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="results" id="resultados">
-      <div class="container">
-        <div class="center-head">
-          <span class="section-kicker">Resultados esperados</span>
-          <h2>Cultura, datos y acciones para recuperar azúcar que deja de perderse.</h2>
-          <p>El valor del sistema está en convertir conocimiento técnico en hábitos operativos, rutinas de seguimiento y resultados documentados.</p>
-        </div>
-        <div class="results-grid">
-          <article class="result-card"><strong>Cultura y competencias</strong><p>Incremento de capacidades en todos los actores involucrados.</p></article>
-          <article class="result-card"><strong>Hábitos y rutinas</strong><p>Adopción de prácticas de observación, análisis y mitigación.</p></article>
-          <article class="result-card"><strong>Reducción paulatina</strong><p>Disminución documentada del crecimiento de actividad microbiológica.</p></article>
-          <article class="result-card"><strong>Recuperación de sacarosa</strong><p>Estimación del azúcar que deja de perderse por menor crecimiento microbiológico.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="participants">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="section-kicker">Participantes</span>
-            <h2>Diseñado para equipos técnicos, operativos y administrativos del ingenio.</h2>
-          </div>
-          <p>La mitigación es más efectiva cuando cada persona entiende su rol dentro del sistema y cuenta con rutinas claras para actuar.</p>
-        </div>
-        <div class="audience-grid">
-          <div class="audience-card">Áreas de molinos</div>
-          <div class="audience-card">Fabricación</div>
-          <div class="audience-card">Laboratorio</div>
-          <div class="audience-card">Gerencia industrial y agrícola</div>
-          <div class="audience-card">Operarios de molinos</div>
-          <div class="audience-card">Analistas de laboratorio</div>
-          <div class="audience-card">Personal administrativo</div>
-          <div class="audience-card">Directivos del ingenio</div>
-        </div>
-      </div>
-    </section>
-
-
 
     <section class="contact" id="contacto">
-      <div class="container">
-        <div class="contact-wrap">
-          <div class="contact-intro">
-            <span class="section-kicker" style="color:var(--green)">Contacto</span>
-            <h2>Hablemos sobre el control microbiológico de tu ingenio.</h2>
-            <p>Comunícate con el equipo de Optimisa para coordinar diagnóstico, presentación de servicios o próximos pasos de implementación.</p>
-          </div>
-          <div class="contact-grid" aria-label="Datos de contacto de Optimisa">
-            <article class="contact-card">
-              <div class="contact-avatar" aria-hidden="true">ON</div>
-              <h3>Osbel Nuñez</h3>
-              <p class="contact-role">Contacto Optimisa</p>
-              <div class="contact-links">
-                <a class="contact-link" href="mailto:osbelnu@gmail.com"><span class="icon">✉</span><span>osbelnu@gmail.com</span></a>
-                <a class="contact-link" href="tel:+50230232870"><span class="icon">☎</span><span>+502 3023 2870</span></a>
-              </div>
-            </article>
-            <article class="contact-card">
-              <div class="contact-avatar" aria-hidden="true">JD</div>
-              <h3>Jonathan Diaz</h3>
-              <p class="contact-role">Contacto Optimisa</p>
-              <div class="contact-links">
-                <a class="contact-link" href="mailto:jonathan.policarpio@gmail.com"><span class="icon">✉</span><span>jonathan.policarpio@gmail.com</span></a>
-                <a class="contact-link" href="tel:+50250326742"><span class="icon">☎</span><span>+502 5032 6742</span></a>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="download" id="descarga">
-      <div class="container">
-        <div class="download-box">
-          <div>
-            <span class="section-kicker" style="color:var(--green)">Presentación de servicios</span>
-            <h2>Descarga la presentación de servicios de Optimisa.</h2>
-            <p>Este bloque queda listo para enlazar el PDF o presentación corporativa. Solo reemplaza el URL en el archivo HTML por la dirección final.</p>
-          </div>
-          <div class="download-side">
-            <a class="btn btn-green" href="/optimisa/assets/presentacion_congreso.pdf" target="_blank" rel="noopener">Descargar presentación</a>
-            <div class="hint">🔒 Solo reemplaza la URL del botón en el HTML por tu enlace final.</div>
-          </div>
+      <div class="container contact-layout">
+        <header class="contact-heading reveal"><span class="section-eyebrow">Contacto</span><h2>Conversemos sobre su próxima zafra.</h2><p>Dé el primer paso para preparar a su equipo y conocer dónde existe mayor potencial para reducir pérdidas.</p></header>
+        <div class="contact-details reveal">
+          <div class="contact-person"><span>Atención directa</span><strong>Lic. Osbel Núñez</strong></div>
+          <a class="contact-link" href="tel:+50230232870"><span>+502 3023 2870</span><span aria-hidden="true">↗</span></a>
+          <a class="contact-link" href="mailto:osbelnue@gmail.com"><span>osbelnue@gmail.com</span><span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-row">
-      <span><strong>Optimisa</strong> · Control microbiológico integral</span>
-      <span><a href="mailto:osbelnu@gmail.com">osbelnu@gmail.com</a> · <a href="mailto:jonathan.policarpio@gmail.com">jonathan.policarpio@gmail.com</a></span>
-      <span>© <span id="year"></span> Optimisa. Todos los derechos reservados.</span>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="container footer-row"><strong>Optimisa · Soluciones para la industria azucarera</strong><span>© <span id="year"></span> Optimisa</span></div></footer>
+
+  <div class="promo-modal" id="promoModal" aria-hidden="true">
+    <div class="promo-backdrop" data-promo-close></div>
+    <section class="promo-dialog" role="dialog" aria-modal="true" aria-labelledby="promoTitle" aria-describedby="promoDescription">
+      <button class="promo-close" id="promoClose" type="button" aria-label="Cerrar promoción" data-promo-close>×</button>
+      <div class="promo-content">
+        <span class="promo-eyebrow">El momento es ahora</span>
+        <h2 id="promoTitle">Antes de la zafra, empodere a todo su equipo.</h2>
+        <p class="promo-intro" id="promoDescription">Prepare a cada área para comprender, prevenir y reducir la actividad microbiológica desde el inicio de la zafra.</p>
+        <div class="promo-offer"><strong>3 días</strong><span>Actualización y capacitación intensiva, adaptada a la función de cada participante.</span></div>
+        <div class="promo-actions"><a class="btn" href="#contacto" data-promo-close>Dar el primer paso →</a><small>Puede realizarse como preparación independiente o como inicio del Programa Integral.</small></div>
+      </div>
+    </section>
+  </div>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const header=document.getElementById('siteHeader');
+    const updateHeader=()=>header.classList.toggle('scrolled',window.scrollY>28);
+    updateHeader();window.addEventListener('scroll',updateHeader,{passive:true});
+    document.getElementById('year').textContent=new Date().getFullYear();
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(element=>observer.observe(element));
+
+    const navToggle=document.getElementById('navToggle');
+    const primaryNav=document.getElementById('primaryNav');
+    const closeMenu=()=>{primaryNav.classList.remove('open');navToggle.setAttribute('aria-expanded','false')};
+    navToggle.addEventListener('click',()=>{const open=navToggle.getAttribute('aria-expanded')==='true';primaryNav.classList.toggle('open',!open);navToggle.setAttribute('aria-expanded',String(!open))});
+    primaryNav.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
+
+    const carousel=document.getElementById('testimonialCarousel');
+    const carouselViewport=carousel.querySelector('.carousel-viewport');
+    const carouselTrack=document.getElementById('testimonialTrack');
+    const testimonials=[...carouselTrack.children];
+    const dotsContainer=document.getElementById('testimonialDots');
+    const counter=document.getElementById('testimonialCounter');
+    let testimonialPage=0;
+    let visibleTestimonials=2;
+    let testimonialPages=3;
+
+    const renderCarousel=()=>{
+      visibleTestimonials=window.matchMedia('(max-width:700px)').matches?1:2;
+      testimonialPages=Math.ceil(testimonials.length/visibleTestimonials);
+      testimonialPage=Math.min(testimonialPage,testimonialPages-1);
+      const gap=parseFloat(getComputedStyle(carouselTrack).gap)||0;
+      const itemWidth=(carouselViewport.clientWidth-gap*(visibleTestimonials-1))/visibleTestimonials;
+      testimonials.forEach(item=>item.style.flexBasis=`${itemWidth}px`);
+      carouselTrack.style.transform=`translate3d(-${testimonialPage*(carouselViewport.clientWidth+gap)}px,0,0)`;
+      dotsContainer.innerHTML='';
+      for(let page=0;page<testimonialPages;page+=1){
+        const dot=document.createElement('button');
+        dot.type='button';dot.className=`carousel-dot${page===testimonialPage?' active':''}`;dot.setAttribute('aria-label',`Ver página ${page+1} de testimonios`);dot.setAttribute('aria-current',page===testimonialPage?'true':'false');
+        dot.addEventListener('click',()=>{testimonialPage=page;renderCarousel()});dotsContainer.appendChild(dot);
+      }
+      counter.textContent=`${String(testimonialPage+1).padStart(2,'0')} / ${String(testimonialPages).padStart(2,'0')}`;
+    };
+    document.getElementById('testimonialPrev').addEventListener('click',()=>{testimonialPage=(testimonialPage-1+testimonialPages)%testimonialPages;renderCarousel()});
+    document.getElementById('testimonialNext').addEventListener('click',()=>{testimonialPage=(testimonialPage+1)%testimonialPages;renderCarousel()});
+    carousel.addEventListener('keydown',event=>{if(event.key==='ArrowLeft')document.getElementById('testimonialPrev').click();if(event.key==='ArrowRight')document.getElementById('testimonialNext').click()});
+    let resizeFrame;
+    window.addEventListener('resize',()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(renderCarousel)});
+    renderCarousel();
+
+    const promoModal=document.getElementById('promoModal');
+    const promoClose=document.getElementById('promoClose');
+    let promoPreviouslyFocused=null;
+    let promoWasShown=false;
+    try{promoWasShown=sessionStorage.getItem('optimisa-promo-shown')==='true'}catch(error){}
+    const openPromo=()=>{
+      if(promoWasShown)return;
+      promoWasShown=true;promoPreviouslyFocused=document.activeElement;
+      promoModal.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');
+      try{sessionStorage.setItem('optimisa-promo-shown','true')}catch(error){}
+      setTimeout(()=>promoClose.focus(),80);
+      window.removeEventListener('scroll',handlePromoScroll);
+    };
+    const closePromo=()=>{
+      promoModal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');
+      if(promoPreviouslyFocused&&typeof promoPreviouslyFocused.focus==='function')promoPreviouslyFocused.focus();
+    };
+    const handlePromoScroll=()=>{if(window.scrollY>220)openPromo()};
+    if(!promoWasShown)window.addEventListener('scroll',handlePromoScroll,{passive:true});
+    promoModal.querySelectorAll('[data-promo-close]').forEach(element=>element.addEventListener('click',closePromo));
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&promoModal.getAttribute('aria-hidden')==='false')closePromo()});
   </script>
 </body>
 </html>
