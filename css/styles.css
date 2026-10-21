@@ -1,13 +1,23 @@
+/* Fuentes alojadas en el sitio (subconjunto latin de Google Fonts, licencia OFL) */
+@font-face { font-family: 'Archivo Black'; font-style: normal; font-weight: 400; font-display: swap; src: url('../fonts/archivo-black-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url('../fonts/instrument-serif-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap; src: url('../fonts/instrument-serif-italic-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'DM Serif Display'; font-style: normal; font-weight: 400; font-display: swap; src: url('../fonts/dm-serif-display-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'DM Serif Display'; font-style: italic; font-weight: 400; font-display: swap; src: url('../fonts/dm-serif-display-italic-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
 :root {
       --bg: #e7e6e0;
       --fg: #111;
-      --muted: #7a786f;
+      --muted: #66645b;
       --line: #c9c7bf;
       --ink: #0e0e0e;
       --accent: #fff;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Los atributos width/height reservan la proporción; la altura la calcula el ancho del CSS. */
+    img { height: auto; }
 
     html, body { height: 100%; }
 
@@ -332,7 +342,8 @@
     .blog-card a:hover .blog-read {
       color: #cfcdc4;
     }
-    .blog-card h3 {
+    .blog-card h3,
+    .blog-listing .blog-card h2 {
       margin-top: 18px;
       font-family: 'Archivo Black', sans-serif;
       font-size: clamp(24px, 2.1vw, 34px);
@@ -1216,6 +1227,7 @@
       .portrait .arch {
         max-height: none;
         border-radius: 0 0 50% 50% / 0 0 28% 28%;
+        background-image: url('../img/jonathan_diaz-900.webp');
       }
       .intro { order: 2; padding-top: 56px; }
       .stats { order: 3; }
@@ -1354,14 +1366,17 @@
         transform: translateY(20px);
         animation: fade-rise .9s var(--ease-out) forwards;
       }
-      .rise-1 { animation-delay: .05s; }
+      /* El H1 y la foto se pintan desde el primer frame para no retrasar FCP/LCP;
+         solo se desplazan o terminan de descubrirse. */
+      .rise-1 { opacity: 1; animation-name: slide-rise; animation-delay: 0s; }
       .rise-2 { animation-delay: .5s; }
       .rise-3 { animation-delay: .64s; }
       @keyframes fade-rise { to { opacity: 1; transform: translateY(0); } }
+      @keyframes slide-rise { to { transform: translateY(0); } }
 
       .portrait .arch {
-        clip-path: inset(0 0 100% 0);
-        animation: arch-reveal 1.2s var(--ease-out) .15s forwards;
+        clip-path: inset(0 0 30% 0);
+        animation: arch-reveal 1.2s var(--ease-out) forwards;
       }
       @keyframes arch-reveal { to { clip-path: inset(0 0 0 0); } }
 

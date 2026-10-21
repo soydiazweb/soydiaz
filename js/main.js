@@ -130,8 +130,11 @@ const body = document.body;
       ['.faq-item', true],
       ['.footer-kicker', false], ['.footer-name', false]
     ];
+    // Lo que ya está en pantalla al cargar no se oculta: retrasaría FCP/LCP.
+    const firstViewport = window.innerHeight;
     revealSpec.forEach(([selector, stagger]) => {
       document.querySelectorAll(selector).forEach((el, i) => {
+        if (el.getBoundingClientRect().top < firstViewport) return;
         el.setAttribute('data-reveal', '');
         if (stagger) el.style.setProperty('--d', `${Math.min(i * 0.08, 0.56)}s`);
       });

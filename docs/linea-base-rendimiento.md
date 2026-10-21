@@ -34,3 +34,26 @@ Las páginas de servicio cumplen los umbrales. **La portada y el blog no cumplen
 ## Seguimiento
 
 Repetir esta medición después de cada cambio de plantilla y una vez al mes. Meta: LCP móvil ≤ 2,5 s y puntuación ≥ 90 en todas las páginas comerciales.
+
+## Correcciones del 2026-10-21 (antes de desplegar)
+
+Medición local con Lighthouse móvil, antes y después en las mismas condiciones. El servidor local no comprime los archivos; en producción Cloudflare sí, así que los valores reales deberían ser iguales o mejores. Hay que confirmarlos midiendo producción después de desplegar.
+
+| Página | LCP móvil antes | LCP móvil después | Perf. después | Accesibilidad después |
+|---|---|---|---|---|
+| Portada | 3,2–3,6 s | **2,3 s** | 97–98 | 100 |
+| Blog | 2,6–3,0 s | **2,6–2,7 s** (en el límite) | 95–96 | 100 (antes 94–98) |
+| WordPress | 1,8 s | 2,0–2,3 s | 97–99 | 100 |
+| Páginas web (pilar) | — | 2,1–2,4 s | 97–98 | 100 |
+| Artículo (errores WordPress) | — | 2,6 s | 97 | 100 |
+
+CLS = 0 en todas las páginas.
+
+Cambios:
+1. Hero: el H1 y la foto se pintan desde el primer frame. La foto empieza descubierta al 70 % en lugar de oculta por completo.
+2. Foto del hero en móvil: versión de 900 px (35 KB en lugar de 136 KB), precargada solo en pantallas de 720 px o menos.
+3. Fuentes servidas desde `/fonts/` (subconjunto latin, OFL) con `font-display: swap` y precarga de Archivo Black e Instrument Serif. Desaparecen la hoja de Google Fonts, que bloqueaba el render, y las dos conexiones externas.
+4. `main.js` con `defer`. Las animaciones al hacer scroll ya no ocultan lo que está en pantalla al cargar (tarjetas del blog, cabecera de artículos).
+5. Blog: la primera portada carga con `eager` y `fetchpriority="high"`. El listado usa variantes de 768 px con `srcset`.
+6. `img { height: auto }`: en producción las portadas del blog medían 331×1024 px en móvil porque el atributo `height` le ganaba a `aspect-ratio`.
+7. Accesibilidad: `--muted` pasa de #7a786f (3,5:1) a #66645b (4,75:1), y los títulos del listado del blog pasan de H3 a H2.
