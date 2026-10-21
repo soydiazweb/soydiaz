@@ -990,12 +990,12 @@
       width: max-content;
       display: flex;
       will-change: transform;
-      animation: gallery-left 48s linear infinite;
+      animation: gallery-left 88s linear infinite;
     }
     .marquee--reverse .marquee-track {
       transform: translateX(-50%);
       animation-name: gallery-right;
-      animation-duration: 54s;
+      animation-duration: 99s;
     }
     .marquee-set {
       display: flex;

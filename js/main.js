@@ -58,7 +58,10 @@ const body = document.body;
       }
     });
     panel?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
-    contactTriggers.forEach(trigger => trigger.addEventListener('click', () => {
+    contactTriggers.forEach(trigger => trigger.addEventListener('click', (event) => {
+      // Los enlaces a /contacto/ abren la burbuja; sin JS siguen llevando a la página.
+      if (contactPanel && trigger.tagName === 'A') event.preventDefault();
+      if (!contactPanel) return;
       toggleContact();
       if (body.classList.contains('contact-open') && typeof window.gtag === 'function') {
         window.gtag('event', 'contact_open', { page_path: window.location.pathname });
