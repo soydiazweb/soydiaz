@@ -62,7 +62,7 @@ Identidad: **Web Advisor** (no "desarrollador web"). Las palabras clave de búsq
 - [x] Portada: incorporar "páginas web" y "sitios web" en H1/intro/servicios sin perder WordPress/Drupal.
 - [x] Diferenciar H2 y FAQ de cada servicio con preguntas reales del cliente ("¿Cuánto cuesta una página web en Guatemala?", "¿Cuánto tarda?", "¿Incluye hosting y dominio?").
 - [ ] `FAQPage` + `Service.offers`/`priceSpecification` con rangos reales (si los apruebas).
-- [ ] Google Business Profile (área de servicio, sin dirección pública) + reseñas de clientes reales.
+- [ ] Google Business Profile (área de servicio, sin dirección pública) + reseñas de clientes reales. Estado 2026-10-21: la cuenta gestiona un perfil "SoyDiaz" (Km 77, Ruta Nacional 14, San Lorenzo El Cubo) **suspendido** y con 0 % de verificación, que en Google Search aparece como la ficha de **Fylsa Guatemala**, un fabricante de otra empresa. No modificarlo. Crear un perfil propio de área de servicio y decidir con Fylsa qué pasa con su ficha.
 - [ ] 3–5 menciones locales: directorios GT, Cámara de Comercio/AGEXPORT, colaboraciones con clientes del portafolio (enlace "sitio desarrollado por").
 
 ### Fase 2 — Autoridad IA / agentes (semanas 3–8)
