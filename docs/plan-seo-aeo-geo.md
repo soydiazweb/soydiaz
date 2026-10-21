@@ -51,8 +51,11 @@ Identidad: **Web Advisor** (no "desarrollador web"). Las palabras clave de búsq
 - [x] Bots de búsqueda IA permitidos (OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User, PerplexityBot: 200). GPTBot y ClaudeBot (entrenamiento) siguen en 403. Original: permitir GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended (B3). Decidir aparte si permites *entrenamiento* o solo *búsqueda*.
 - [x] Crear `/llms.txt` con resumen de marca, servicios y URLs clave (B4).
 - [x] `/optimisa/`: `noindex` o moverla a subdominio.
-- [ ] Search Console + Bing Webmaster: enviar sitemap, inspeccionar las 7 URLs comerciales. Bing alimenta a ChatGPT/Copilot.
-- [ ] Línea base: exportar consultas/páginas de GSC (últimos 3 meses) y correr el panel de prompts IA (abajo).
+- [x] Search Console (propiedad de dominio `soydiaz.com`, 2026-10-21): sitemap enviado y leído; indexación solicitada para portada, WordPress, Drupal, mantenimiento, tiendas, IA y contacto. La portada ya estaba indexada; las 6 restantes estaban "descubiertas, sin indexar". Datos de rendimiento aún en proceso.
+- [ ] Tras desplegar la Fase 1: solicitar indexación de `/paginas-web-guatemala/` y volver a enviar el sitemap.
+- [ ] Bing Webmaster: importar desde Search Console. Bing alimenta a ChatGPT/Copilot.
+- [x] Línea base de rendimiento: `docs/linea-base-rendimiento.md`.
+- [ ] Línea base de búsqueda: exportar consultas y páginas de GSC cuando terminen de procesarse (24–72 h) y correr el panel de prompts IA (abajo).
 
 ### Fase 1 — Guatemala comercial (semanas 2–4)
 - [x] Nueva página pilar **`/paginas-web-guatemala/`** (sin precios: pendientes de confirmar) ("Páginas web para empresas en Guatemala": tipos, qué incluye, rangos de inversión en GTQ, plazos, proceso, FAQ).
