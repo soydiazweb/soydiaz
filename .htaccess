@@ -4,6 +4,17 @@ DirectoryIndex index.html
 
 RewriteEngine On
 
+# Unificar las variantes de producción antes de servir archivos existentes.
+# El proxy debe conservar X-Forwarded-Proto para evitar bucles detrás del CDN.
+RewriteCond %{HTTP_HOST} ^www\.soydiaz\.com$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^soydiaz\.com$ [NC]
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !^https$ [NC]
+RewriteRule ^ https://soydiaz.com%{REQUEST_URI} [R=308,L,NE]
+
+RewriteCond %{HTTP_HOST} ^www\.soydiaz\.com$ [NC]
+RewriteRule ^ https://soydiaz.com%{REQUEST_URI} [R=308,L,NE]
+
 # Evita aplicar reglas a archivos o carpetas que sí existen
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d

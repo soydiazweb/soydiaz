@@ -1,0 +1,41 @@
+# SoyDiaz
+
+> SoyDiaz es la marca de Jonathan Díaz Policarpio, desarrollador web para empresas en Guatemala y Latinoamérica. Desarrolla sitios y portales con WordPress, Drupal y PHP, tiendas en línea con Shopify o WooCommerce, mantenimiento web e integraciones de IA, APIs y automatización de procesos con supervisión humana.
+
+- Atención remota para Guatemala y Latinoamérica.
+- Idioma del sitio: español (Guatemala).
+- Contacto: jonathan.policarpio@gmail.com · https://www.linkedin.com/in/soydiazweb/ · https://github.com/soydiazweb
+
+## Servicios
+
+- [Desarrollo web en Guatemala](https://soydiaz.com/): portada con servicios, proyectos, experiencia y preguntas frecuentes.
+- [Desarrollo WordPress en Guatemala](https://soydiaz.com/desarrollo-wordpress-guatemala/): sitios WordPress empresariales, plugins e integraciones.
+- [Desarrollo Drupal en Guatemala](https://soydiaz.com/desarrollo-drupal-guatemala/): portales con contenido estructurado, permisos, módulos e integraciones.
+- [Tiendas en línea en Guatemala](https://soydiaz.com/tiendas-en-linea-guatemala/): ecommerce con Shopify o WooCommerce: catálogo, pagos, envíos e integraciones.
+- [Mantenimiento web en Guatemala](https://soydiaz.com/mantenimiento-web-guatemala/): mantenimiento de WordPress y Drupal: actualizaciones, copias, formularios e integraciones.
+- [Integraciones de IA para empresas](https://soydiaz.com/integraciones-ia/): IA, APIs y automatización en plataformas web, con datos, supervisión y costos definidos.
+- [Contacto](https://soydiaz.com/contacto/): cómo preparar el contexto de un proyecto y escribir a Jonathan Díaz.
+
+## Guías sobre IA y automatización
+
+- [IA en procesos empresariales: dónde aporta valor y cómo supervisarla](https://soydiaz.com/blog/ia-procesos-empresariales-supervision/)
+- [Cómo saber si una empresa realmente necesita IA](https://soydiaz.com/blog/empresa-necesita-ia/)
+- [Qué sí automatizar con IA en desarrollo web](https://soydiaz.com/blog/automatizar-ia-desarrollo-web/)
+- [5 automatizaciones que puedes añadir a una web](https://soydiaz.com/blog/automatizaciones-web/)
+- [Integraciones API: cómo conectar una web con CRM y ecommerce](https://soydiaz.com/blog/integraciones-api-web-empresas/)
+- [El error de usar IA para escribir código sin entender la arquitectura](https://soydiaz.com/blog/ia-codigo-arquitectura-web/)
+
+## Guías sobre desarrollo web
+
+- [Cómo contratar desarrollo web en Guatemala](https://soydiaz.com/blog/antes-de-contratar-desarrollo-web/)
+- [Drupal o WordPress: cómo elegir un CMS para tu empresa](https://soydiaz.com/blog/elegir-cms-empresa/)
+- [Mantenimiento web empresarial: un plan preventivo](https://soydiaz.com/blog/mantenimiento-preventivo-web-empresarial/)
+- [Cómo planificar una migración web sin perder SEO](https://soydiaz.com/blog/migrar-sitio-web-sin-perder-seo/)
+- [SEO técnico para sitios empresariales](https://soydiaz.com/blog/seo-tecnico-sitios-empresariales/)
+- [Seguridad en WordPress y Drupal](https://soydiaz.com/blog/seguridad-cms-mantenimiento/)
+- [Rendimiento web empresarial: qué medir antes de optimizar](https://soydiaz.com/blog/rendimiento-web-empresarial/)
+
+## Optional
+
+- [Blog completo](https://soydiaz.com/blog/)
+- [Sitemap](https://soydiaz.com/sitemap.xml)
