@@ -111,3 +111,7 @@ html:not(.js) .carousel-controls { display: none; }
   .services-head { align-items: center; }
   .carousel-btn { width: 42px; height: 42px; }
 }
+
+/* Respuesta directa al inicio de los artículos (la que citan buscadores y asistentes de IA) */
+.article-lead { border-left: 3px solid var(--green); padding-left: 20px; margin-bottom: 28px; }
+.article-content .content-table { margin: 24px 0 32px; }
