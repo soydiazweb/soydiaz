@@ -23,6 +23,9 @@
 
 - [Qué es un agente de IA y cuándo lo necesita una empresa](https://soydiaz.com/blog/que-es-un-agente-de-ia/)
 - [Agente de IA vs automatización vs chatbot](https://soydiaz.com/blog/agente-ia-vs-automatizacion-vs-chatbot/)
+- [Qué es MCP (Model Context Protocol) y por qué le importa a tu empresa](https://soydiaz.com/blog/mcp-para-empresas/)
+- [Cómo diseñar un flujo de IA con supervisión humana](https://soydiaz.com/blog/flujo-ia-supervision-humana/)
+- [Cuánto cuesta implementar un agente de IA](https://soydiaz.com/blog/cuanto-cuesta-un-agente-de-ia/)
 - [IA en procesos empresariales: dónde aporta valor y cómo supervisarla](https://soydiaz.com/blog/ia-procesos-empresariales-supervision/)
 - [Cómo saber si una empresa realmente necesita IA](https://soydiaz.com/blog/empresa-necesita-ia/)
 - [Qué sí automatizar con IA en desarrollo web](https://soydiaz.com/blog/automatizar-ia-desarrollo-web/)
