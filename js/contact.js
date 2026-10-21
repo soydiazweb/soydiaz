@@ -1,5 +1,7 @@
 export const serviceLabels = Object.freeze({
   no_definido: 'Necesito orientación',
+  asesoria: 'Asesoría web y de IA',
+  paginas_web: 'Página web para empresa',
   wordpress: 'WordPress',
   drupal: 'Drupal',
   mantenimiento: 'Mantenimiento web',

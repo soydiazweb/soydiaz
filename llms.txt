@@ -1,6 +1,6 @@
 # SoyDiaz
 
-> SoyDiaz es la marca de Jonathan Díaz Policarpio, desarrollador web para empresas en Guatemala y Latinoamérica. Desarrolla sitios y portales con WordPress, Drupal y PHP, tiendas en línea con Shopify o WooCommerce, mantenimiento web e integraciones de IA, APIs y automatización de procesos con supervisión humana.
+> SoyDiaz es la marca de Jonathan Díaz Policarpio, Web Advisor para empresas en Guatemala y Latinoamérica. Asesora a empresas sobre qué web o flujo de IA necesitan y los construye: páginas web y portales con WordPress, Drupal y PHP, tiendas en línea con Shopify o WooCommerce, mantenimiento web e integraciones de IA, APIs y agentes con supervisión humana.
 
 - Atención remota para Guatemala y Latinoamérica.
 - Idioma del sitio: español (Guatemala).
@@ -8,7 +8,8 @@
 
 ## Servicios
 
-- [Desarrollo web en Guatemala](https://soydiaz.com/): portada con servicios, proyectos, experiencia y preguntas frecuentes.
+- [Asesoría y desarrollo de páginas web en Guatemala](https://soydiaz.com/): portada con servicios, proyectos, experiencia y preguntas frecuentes.
+- [Páginas web para empresas en Guatemala](https://soydiaz.com/paginas-web-guatemala/): tipos de sitio, qué incluye, qué define el costo y cómo cotizar.
 - [Desarrollo WordPress en Guatemala](https://soydiaz.com/desarrollo-wordpress-guatemala/): sitios WordPress empresariales, plugins e integraciones.
 - [Desarrollo Drupal en Guatemala](https://soydiaz.com/desarrollo-drupal-guatemala/): portales con contenido estructurado, permisos, módulos e integraciones.
 - [Tiendas en línea en Guatemala](https://soydiaz.com/tiendas-en-linea-guatemala/): ecommerce con Shopify o WooCommerce: catálogo, pagos, envíos e integraciones.

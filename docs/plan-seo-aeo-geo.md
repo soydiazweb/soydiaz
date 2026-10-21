@@ -40,20 +40,24 @@ Dos objetivos:
 
 ---
 
+## Posicionamiento
+
+Identidad: **Web Advisor** (no "desarrollador web"). Las palabras clave de búsqueda (páginas web, desarrollo web, Guatemala) se mantienen en títulos y contenido; la identidad en biografía, `jobTitle`, H1 y llms.txt es Web Advisor.
+
 ## Plan por fases
 
 ### Fase 0 — Desbloquear (semana 1)
-- [ ] Revisar diff, commit y desplegar el trabajo pendiente (B1, B2).
-- [ ] Cloudflare: permitir GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended (B3). Decidir aparte si permites *entrenamiento* o solo *búsqueda*.
-- [ ] Crear `/llms.txt` con resumen de marca, servicios y URLs clave (B4).
-- [ ] `/optimisa/`: `noindex` o moverla a subdominio.
+- [x] Revisar diff, commit y desplegar el trabajo pendiente (B1, B2). Verificado 2026-10-21: 27 URLs 200, http/www → 308.
+- [x] Bots de búsqueda IA permitidos (OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User, PerplexityBot: 200). GPTBot y ClaudeBot (entrenamiento) siguen en 403. Original: permitir GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended (B3). Decidir aparte si permites *entrenamiento* o solo *búsqueda*.
+- [x] Crear `/llms.txt` con resumen de marca, servicios y URLs clave (B4).
+- [x] `/optimisa/`: `noindex` o moverla a subdominio.
 - [ ] Search Console + Bing Webmaster: enviar sitemap, inspeccionar las 7 URLs comerciales. Bing alimenta a ChatGPT/Copilot.
 - [ ] Línea base: exportar consultas/páginas de GSC (últimos 3 meses) y correr el panel de prompts IA (abajo).
 
 ### Fase 1 — Guatemala comercial (semanas 2–4)
-- [ ] Nueva página pilar **`/paginas-web-guatemala/`** ("Páginas web para empresas en Guatemala": tipos, qué incluye, rangos de inversión en GTQ, plazos, proceso, FAQ).
-- [ ] Portada: incorporar "páginas web" y "sitios web" en H1/intro/servicios sin perder WordPress/Drupal.
-- [ ] Diferenciar H2 y FAQ de cada servicio con preguntas reales del cliente ("¿Cuánto cuesta una página web en Guatemala?", "¿Cuánto tarda?", "¿Incluye hosting y dominio?").
+- [x] Nueva página pilar **`/paginas-web-guatemala/`** (sin precios: pendientes de confirmar) ("Páginas web para empresas en Guatemala": tipos, qué incluye, rangos de inversión en GTQ, plazos, proceso, FAQ).
+- [x] Portada: incorporar "páginas web" y "sitios web" en H1/intro/servicios sin perder WordPress/Drupal.
+- [x] Diferenciar H2 y FAQ de cada servicio con preguntas reales del cliente ("¿Cuánto cuesta una página web en Guatemala?", "¿Cuánto tarda?", "¿Incluye hosting y dominio?").
 - [ ] `FAQPage` + `Service.offers`/`priceSpecification` con rangos reales (si los apruebas).
 - [ ] Google Business Profile (área de servicio, sin dirección pública) + reseñas de clientes reales.
 - [ ] 3–5 menciones locales: directorios GT, Cámara de Comercio/AGEXPORT, colaboraciones con clientes del portafolio (enlace "sitio desarrollado por").
