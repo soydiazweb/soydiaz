@@ -115,3 +115,8 @@ html:not(.js) .carousel-controls { display: none; }
 /* Respuesta directa al inicio de los artículos (la que citan buscadores y asistentes de IA) */
 .article-lead { border-left: 3px solid var(--green); padding-left: 20px; margin-bottom: 28px; }
 .article-content .content-table { margin: 24px 0 32px; }
+
+/* Contactos directos en la página de capacitación */
+.training-contacts { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 14px; }
+.training-contacts .cta { margin-top: 0; }
+.service-feature-grid + p { margin-top: 28px; }

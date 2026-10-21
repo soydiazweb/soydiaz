@@ -15,6 +15,7 @@
 - [Tiendas en línea en Guatemala](https://soydiaz.com/tiendas-en-linea-guatemala/): ecommerce con Shopify o WooCommerce: catálogo, pagos, envíos e integraciones.
 - [Mantenimiento web en Guatemala](https://soydiaz.com/mantenimiento-web-guatemala/): mantenimiento de WordPress y Drupal: actualizaciones, copias, formularios e integraciones.
 - [Agentes y flujos de IA para empresas en Guatemala](https://soydiaz.com/agentes-ia/): qué es un agente de IA, cuándo conviene frente a un chatbot o una automatización, cómo se diseña con supervisión humana y qué define su costo.
+- [Capacitación en IA para empresas](https://soydiaz.com/capacitacion-ia-empresas/): capacitación práctica para equipos no técnicos, enfocada en el uso seguro y en optimizar flujos y procesos.
 - [Integraciones de IA para empresas](https://soydiaz.com/integraciones-ia/): IA, APIs y automatización en plataformas web, con datos, supervisión y costos definidos.
 - [Contacto](https://soydiaz.com/contacto/): cómo preparar el contexto de un proyecto y escribir a Jonathan Díaz.
 
