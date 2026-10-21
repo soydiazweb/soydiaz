@@ -51,15 +51,18 @@ Identidad: **Web Advisor** (no "desarrollador web"). Las palabras clave de búsq
 - [x] Bots de búsqueda IA permitidos (OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User, PerplexityBot: 200). GPTBot y ClaudeBot (entrenamiento) siguen en 403. Original: permitir GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended (B3). Decidir aparte si permites *entrenamiento* o solo *búsqueda*.
 - [x] Crear `/llms.txt` con resumen de marca, servicios y URLs clave (B4).
 - [x] `/optimisa/`: `noindex` o moverla a subdominio.
-- [ ] Search Console + Bing Webmaster: enviar sitemap, inspeccionar las 7 URLs comerciales. Bing alimenta a ChatGPT/Copilot.
-- [ ] Línea base: exportar consultas/páginas de GSC (últimos 3 meses) y correr el panel de prompts IA (abajo).
+- [x] Search Console (propiedad de dominio `soydiaz.com`, 2026-10-21): sitemap enviado y leído; indexación solicitada para portada, WordPress, Drupal, mantenimiento, tiendas, IA y contacto. La portada ya estaba indexada; las 6 restantes estaban "descubiertas, sin indexar". Datos de rendimiento aún en proceso.
+- [ ] Tras desplegar la Fase 1: solicitar indexación de `/paginas-web-guatemala/` y volver a enviar el sitemap.
+- [ ] Bing Webmaster: importar desde Search Console. Bing alimenta a ChatGPT/Copilot.
+- [x] Línea base de rendimiento: `docs/linea-base-rendimiento.md`.
+- [ ] Línea base de búsqueda: exportar consultas y páginas de GSC cuando terminen de procesarse (24–72 h) y correr el panel de prompts IA (abajo).
 
 ### Fase 1 — Guatemala comercial (semanas 2–4)
 - [x] Nueva página pilar **`/paginas-web-guatemala/`** (sin precios: pendientes de confirmar) ("Páginas web para empresas en Guatemala": tipos, qué incluye, rangos de inversión en GTQ, plazos, proceso, FAQ).
 - [x] Portada: incorporar "páginas web" y "sitios web" en H1/intro/servicios sin perder WordPress/Drupal.
 - [x] Diferenciar H2 y FAQ de cada servicio con preguntas reales del cliente ("¿Cuánto cuesta una página web en Guatemala?", "¿Cuánto tarda?", "¿Incluye hosting y dominio?").
 - [ ] `FAQPage` + `Service.offers`/`priceSpecification` con rangos reales (si los apruebas).
-- [ ] Google Business Profile (área de servicio, sin dirección pública) + reseñas de clientes reales.
+- [ ] Google Business Profile (área de servicio, sin dirección pública) + reseñas de clientes reales. Estado 2026-10-21: la cuenta gestiona un perfil "SoyDiaz" (Km 77, Ruta Nacional 14, San Lorenzo El Cubo) **suspendido** y con 0 % de verificación, que en Google Search aparece como la ficha de **Fylsa Guatemala**, un fabricante de otra empresa. No modificarlo. Crear un perfil propio de área de servicio y decidir con Fylsa qué pasa con su ficha.
 - [ ] 3–5 menciones locales: directorios GT, Cámara de Comercio/AGEXPORT, colaboraciones con clientes del portafolio (enlace "sitio desarrollado por").
 
 ### Fase 2 — Autoridad IA / agentes (semanas 3–8)
