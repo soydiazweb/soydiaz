@@ -93,3 +93,21 @@ html:not(.js) .faq-answer { grid-template-rows: 1fr; }
   .service-contact .cta { padding-left: 20px; letter-spacing: 0; font-size: 12px; }
 }
 @media print { .menu-btn, .nav-panel, .nav-scrim, .contact-panel, .back-top { display: none; } }
+
+/* Carrusel de servicios en la portada */
+.services-carousel { display: block; min-width: 0; max-width: 100%; }
+.services-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+.carousel-controls { display: flex; gap: 10px; flex-shrink: 0; }
+html:not(.js) .carousel-controls { display: none; }
+.carousel-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--ink); background: transparent; color: var(--ink); font-size: 20px; line-height: 1; cursor: pointer; transition: background .2s ease, color .2s ease, opacity .2s ease; }
+.carousel-btn:hover:not(:disabled) { background: var(--ink); color: var(--bg); }
+.carousel-btn:disabled { opacity: .3; cursor: default; }
+.services-track { min-width: 0; display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 64px) / 3); gap: 32px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; padding-bottom: 18px; scrollbar-width: thin; }
+.services-track > .service { scroll-snap-align: start; border: 1px solid var(--line); padding: 28px; background: rgba(255,255,255,.22); }
+.services-track > .service p { max-width: none; }
+@media (max-width: 1100px) { .services-track { grid-auto-columns: calc((100% - 32px) / 2); } }
+@media (max-width: 720px) {
+  .services-track { grid-auto-columns: 84%; gap: 16px; }
+  .services-head { align-items: center; }
+  .carousel-btn { width: 42px; height: 42px; }
+}
