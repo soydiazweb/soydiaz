@@ -71,7 +71,8 @@ const body = document.body;
       const link = event.target.closest('a[href]');
       if (!link || typeof window.gtag !== 'function') return;
       const href = link.getAttribute('href');
-      const method = href.startsWith('mailto:') ? 'email' :
+      const method = href.startsWith('https://wa.me/50250326742') ? 'whatsapp' :
+        href.startsWith('mailto:') ? 'email' :
         href.startsWith('https://www.linkedin.com/in/soydiazweb') ? 'linkedin' : null;
       if (method) window.gtag('event', 'contact_click', {
         contact_method: method,
@@ -110,6 +111,25 @@ const body = document.body;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const finePointer = window.matchMedia('(pointer: fine)').matches;
 
+    // Carrusel de servicios: flechas que avanzan una tarjeta y se desactivan en los extremos
+    document.querySelectorAll('.services-carousel').forEach((carousel) => {
+      const track = carousel.querySelector('.services-track');
+      const buttons = carousel.querySelectorAll('.carousel-btn');
+      if (!track) return;
+      const update = () => {
+        const max = track.scrollWidth - track.clientWidth - 2;
+        buttons.forEach((b) => { b.disabled = b.dataset.dir === '-1' ? track.scrollLeft <= 2 : track.scrollLeft >= max; });
+      };
+      buttons.forEach((b) => b.addEventListener('click', () => {
+        const card = track.querySelector('.service');
+        const step = card ? card.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0) : track.clientWidth;
+        track.scrollBy({ left: step * Number(b.dataset.dir), behavior: reducedMotion ? 'auto' : 'smooth' });
+      }));
+      track.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    });
+
     // Barra de progreso de lectura
     const progress = document.createElement('div');
     progress.className = 'scroll-progress';
@@ -118,7 +138,7 @@ const body = document.body;
 
     // Reveals al hacer scroll (con stagger por grupo)
     const revealSpec = [
-      ['.services .service', true],
+      ['.services-track', false],
       ['.blog-preview h2', false], ['.blog-preview-copy p', false], ['.blog-card', true],
       ['.blog-listing .blog-card', true], ['.article-header', false], ['.article-content > *', true],
       ['.clients h2', false], ['.clients-heading p', false], ['.client', true],
