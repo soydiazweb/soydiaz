@@ -5,21 +5,34 @@ const body = document.body;
     const contactPanel = document.getElementById('contactPanel');
     const contactClose = document.querySelector('.contact-close');
     const contactTriggers = document.querySelectorAll('.contact-trigger');
+    let contactOpener;
+    if (panel) panel.inert = true;
+    if (contactPanel) contactPanel.inert = true;
 
     const toggleMenu = (force) => {
       const open = typeof force === 'boolean' ? force : !body.classList.contains('menu-open');
+      const restoreFocus = !open && panel?.contains(document.activeElement);
       if (open) toggleContact(false);
       body.classList.toggle('menu-open', open);
-      btn.setAttribute('aria-expanded', String(open));
-      panel.setAttribute('aria-hidden', String(!open));
+      btn?.setAttribute('aria-expanded', String(open));
+      panel?.setAttribute('aria-hidden', String(!open));
+      if (panel) panel.inert = !open;
+      if (open) panel?.querySelector('a')?.focus();
+      else if (restoreFocus) btn?.focus();
     };
 
     const toggleContact = (force) => {
       const open = typeof force === 'boolean' ? force : !body.classList.contains('contact-open');
+      if (!contactPanel) return;
+      const restoreFocus = !open && contactPanel.contains(document.activeElement);
+      if (open) contactOpener = document.activeElement;
       if (open) toggleMenu(false);
       body.classList.toggle('contact-open', open);
       contactPanel.setAttribute('aria-hidden', String(!open));
+      contactPanel.inert = !open;
       contactTriggers.forEach(trigger => trigger.setAttribute('aria-expanded', String(open)));
+      if (open) contactClose?.focus();
+      else if (restoreFocus) contactOpener?.focus();
     };
 
     btn?.addEventListener('click', () => toggleMenu());
@@ -32,18 +45,59 @@ const body = document.body;
         toggleMenu(false);
         toggleContact(false);
       }
+      if (e.key === 'Tab') {
+        const menuOpen = body.classList.contains('menu-open');
+        const activePanel = menuOpen ? panel : body.classList.contains('contact-open') ? contactPanel : null;
+        if (!activePanel) return;
+        const focusable = [...activePanel.querySelectorAll('a[href], button:not([disabled])')];
+        if (menuOpen && btn) focusable.unshift(btn);
+        const first = focusable[0];
+        const last = focusable.at(-1);
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+      }
     });
     panel?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
-    contactTriggers.forEach(trigger => trigger.addEventListener('click', () => toggleContact()));
+    contactTriggers.forEach(trigger => trigger.addEventListener('click', () => {
+      toggleContact();
+      if (body.classList.contains('contact-open') && typeof window.gtag === 'function') {
+        window.gtag('event', 'contact_open', { page_path: window.location.pathname });
+      }
+    }));
     contactClose?.addEventListener('click', () => toggleContact(false));
     contactPanel?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleContact(false)));
 
-    document.querySelectorAll('.faq-question').forEach(question => {
+    document.addEventListener('click', event => {
+      const link = event.target.closest('a[href]');
+      if (!link || typeof window.gtag !== 'function') return;
+      const href = link.getAttribute('href');
+      const method = href.startsWith('mailto:') ? 'email' :
+        href.startsWith('https://www.linkedin.com/in/soydiazweb') ? 'linkedin' : null;
+      if (method) window.gtag('event', 'contact_click', {
+        contact_method: method,
+        page_path: window.location.pathname,
+        transport_type: 'beacon'
+      });
+    });
+
+    document.querySelectorAll('.faq-question').forEach((question, index) => {
+      const answer = question.closest('.faq-item')?.querySelector('.faq-answer');
+      question.id ||= `faq-question-${index + 1}`;
+      if (answer) {
+        answer.id ||= `faq-answer-${index + 1}`;
+        answer.inert = true;
+        answer.setAttribute('aria-hidden', 'true');
+        question.setAttribute('aria-controls', answer.id);
+      }
       question.addEventListener('click', () => {
         const item = question.closest('.faq-item');
         const open = !item.classList.contains('is-open');
         item.classList.toggle('is-open', open);
         question.setAttribute('aria-expanded', String(open));
+        if (answer) {
+          answer.inert = !open;
+          answer.setAttribute('aria-hidden', String(!open));
+        }
       });
     });
 
@@ -82,14 +136,16 @@ const body = document.body;
         if (stagger) el.style.setProperty('--d', `${Math.min(i * 0.08, 0.56)}s`);
       });
     });
-    const io = new IntersectionObserver((entries) => {
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-in');
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }) : {
+      observe(el) { el.classList.add('is-in'); }
+    };
     document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
     document.querySelectorAll('.personal-photo').forEach((el, i) => {
       el.style.setProperty('--d', `${Math.min(i * 0.08, 0.56)}s`);
